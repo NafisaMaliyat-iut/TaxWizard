@@ -32,9 +32,6 @@ jobs:
           workload_identity_provider: '${{secrets._WIF_PROVIDER}}' 
           service_account: '${{secrets._WIF_SERVICE_ACCOUNT}}'
         
-      - name: Gcloud Login
-        run: echo "${{secrets._AUTH_TOKEN}}"|gcloud auth login no-launch-browser
-
 
       - name: Docker Auth
         id: docker-auth
@@ -46,8 +43,8 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" ./
-          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
+          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/MY-REPO/${{ env.SERVICE }}:${{ github.sha }}" ./
+          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/MY-REPO/${{ env.SERVICE }}:${{ github.sha }}"
 
 
       - name: Deploy to Cloud Run
@@ -56,7 +53,7 @@ jobs:
         with:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
-          image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}
+          image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/MY-REPO/${{ env.SERVICE }}:${{ github.sha }}
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
