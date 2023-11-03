@@ -35,15 +35,25 @@
               <label class="<%= labelClass %>" for="year">
                 Select A Year
               </label>
-              <select id="year" name="year" class="<%= inputFieldClass %> origin-bottom bottom-0" required>
-                <% for (let year = new Date().getFullYear(); year >= 2010; year--) { %>
-                <option value="<%= year %>"><%= year %></option>
-                <% } %>
-              </select>
-              <div class="flex mt-4 items-center">
-                <button type="button" onclick="" class="<%= primaryButtonClass %>">
-                  Generate
-                </button>
+
+
+              <form method="POST" id="year-data">
+                <select id="year" name="year" class="<%= inputFieldClass %> origin-bottom bottom-0" required>
+                  <% for (let year = new Date().getFullYear(); year >= 2010; year--) { %>
+                  <option value="<%= year %>"><%= year %></option>
+                  <% } %>
+                </select>
+                <div class="flex mt-4 items-center">
+                  <button type="submit" onclick="" class="<%= primaryButtonClass %>">
+                    Generate
+                  </button>
+                </div>
+              </form>
+              
+
+
+
+              
               </div>
             </div>
           </div>
@@ -120,6 +130,34 @@
       </div>
     </div>
   </div>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const calculateData = document.getElementById('year-data');
+      console.log("I am triggered");
+      calculateData.addEventListener('submit', async (event) => {
+          event.preventDefault();
+  
+          const formData = new FormData(calculateData);
+  
+          try {
+              const response = await fetch('/report', {
+                  method: 'POST',
+                  body: JSON.stringify(Object.fromEntries(formData)),
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + localStorage.getItem('token'), 
+                  },
+              });
+  
+              const data = await response.json();
+              
+              // Update the DOM with the response data here
+          } catch (error) {
+              console.error(error);
+          }
+      });
+    });
+  </script>
 </body>
 
 </html>
