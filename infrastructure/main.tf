@@ -34,7 +34,7 @@ provider "google-beta" {
 
 resource "google_service_account" "sa" {
   project    = var.gcp_project_id
-  account_id = "test-storage-sa"
+  account_id = "tax-worker"
 }
 
 resource "google_project_iam_member" "project" {
