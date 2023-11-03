@@ -23,7 +23,7 @@
         <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
       </div>
       <div class="w-full py-6 z-20">
-        <form action="" method="post" class="w-full px-6 lg:px-12 mx-auto">
+        <form action="/loginUser" id="login-form" method="post" class="w-full px-6 lg:px-12 mx-auto">
           <div class="pb-2 pt-4">
             <label class="<%= labelClass %>" for="nid">
               NID
@@ -46,9 +46,10 @@
             <% } %>
           <div class="px-4 pb-2 pt-4">
             <div class="z-10">
-              <button type="submit" class="<%= primaryButtonClass %>">
+              <!-- <button type="submit" class="<%= primaryButtonClass %>">
                 Login
-              </button>
+              </button> -->
+              <input type="submit" value="Login" class="<%= primaryButtonClass %>">
             </div>
           </div>
         </form>
@@ -66,5 +67,39 @@
 
   </section>
 </body>
+
+<script defer type="text/javascript">
+
+  document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('login-form');
+  
+      loginForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+  
+          const formData = new FormData(loginForm);
+  
+          try {
+              const response = await fetch('/loginUser', {
+                  method: 'POST',
+                  body: JSON.stringify(Object.fromEntries(formData)),
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+              });
+  
+              const data = await response.json();
+  
+              if (data.success) {
+                  localStorage.setItem('token', data.token);
+                  window.location.href = data.redirectTo;
+              } else {
+                  console.log('Authentication failed:', data.error);
+              }
+          } catch (error) {
+              console.error('Login failed:', error);
+          }
+      });
+  });
+  </script>
 
 </html>
