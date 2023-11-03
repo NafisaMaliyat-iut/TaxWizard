@@ -85,29 +85,13 @@
               <p class="text-[#03045e] text-lg">City Corporation</p>
               <p id="city_corporation"></p>
             </div>
-            <div class="md:grid hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">
-                We are transparent with our tax calculation. Here's a breakdown of your tax in <span id="selected-year"></span>.
+            <div class="md:grid hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b text-[#03045e]">
+              <p class="text-lg">
+                We are transparent with our tax calculation. Here's a breakdown of your tax in&nbsp;<span class="font-bold" id="selected-year"></span>.
               </p>
-              <span>
-                Your tax free income is BDT&nbsp;
-                <span id="tax-free">350,000</span>.<br />
-                For the remaining BDT&nbsp;
-                <span id="remaining-amount"></span>, you were charged BDT&nbsp;
-                <span id="tax-percentage"></span><br />
-                After the tax deduction, your remaining amount is BDT&nbsp;
-                <span id="post-deducted"></span>.
-                <br />
-                Since your remaining amount comes to more than
-                <span id="additional-income-condition"></span>
-                , you are charged a 25% on your additional income which comes to BDT&nbsp;
-                <span id="extra-deducted"></span>
-                <span>
-                  <br />
-                  Thus total taxable comes to
-                  <span id="total-taxable"></span>
-                </span>
-              </span>
+              <br />
+              <div id="breakdown-report"></div>
+              <br />
               <div class="font-bold">All our tax calculations are done according to the Bangladesh Tax Act of 2023.
               </div>
             </div>
@@ -117,7 +101,6 @@
           <div>
             <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
               <p class="text-[#03045e] text-lg">No Data Found For This Year</p>
-              <p id="city_corporation"></p>
             </div>
           </div>
         </section>
@@ -145,7 +128,7 @@
 
           const data = await response.json();
           console.log(data);
-          if (data.taxPayer[0] || data.user || data.taxPayer[0].length === 0 || data.user.length === 0) {
+          if (!data.taxPayer[0] || !data.user || data.taxPayer[0].length === 0 || data.user.length === 0) {
             document.getElementById('no-data').classList.remove('hidden');
           } else {
             const dataTable = document.getElementById('data');
@@ -156,14 +139,89 @@
             document.getElementById('curr_year').innerText = data.taxPayer[0].year || "N/A";
             document.getElementById('income').innerText = data.taxPayer[0].yearly_amount || "N/A";
             document.getElementById('city_corporation').innerText = data.user.city_corporation || "N/A";
+            document.getElementById('selected-year').innerText = data.taxPayer[0].year || "N/A";
           }
-
-          // Update the DOM with the response data here
+          calculateTax(data.taxPayer[0].yearly_amount, data.user.gender, data.user.age, data.user.city_corporation);
         } catch (error) {
           console.log(error);
         }
       });
     });
+  </script>
+  <script>
+    function calculateTax(income, gender, age, city_corporation) {
+      const taxFreeIncome = gender === "female" || age > 65 ? 400000 : 350000;
+      document.getElementById('breakdown-report').innerHTML += `<li>Your tax-free income (the amount you can earn without having to pay for any taxes) is BDT ${taxFreeIncome}.</li>`;
+
+      income = parseFloat(income);
+      let taxableIncome = income - taxFreeIncome;
+
+      if (taxableIncome <= 0) {
+        document.getElementById('breakdown-report').innerHTML += `<li>Since your yearly income BDT ${income} did not exceed the tax-free income, your taxable amount for this year is at <strong>BDT 0</strong>.</li>`;
+        return;
+      }
+
+      document.getElementById('breakdown-report').innerHTML += `<li>Your yearly income exceeds the tax-free income, your taxable amount for this year is at BDT ${taxableIncome}.</li>`;
+
+      let totalTax = 0;
+
+      if (taxableIncome <= 100000) {
+        totalTax = taxableIncome * 0.05;
+        document.getElementById('breakdown-report').innerHTML += `<li>Your taxable amount BDT ${taxableIncome} exceeds the BDT 100,000 threshold, so your total tax is 5% of your taxable income. In your case, this is BDT ${totalTax}.</li>`;
+      } else {
+        totalTax += 100000 * 0.05;
+        document.getElementById('breakdown-report').innerHTML += `<li>Your taxable amount BDT ${taxableIncome} reaches the BDT 100,000 threshold, 5% of it is added to tax. In your case, this is BDT ${0.05*taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+        taxableIncome -= 100000;
+
+        if (taxableIncome <= 300000) {
+          totalTax += taxableIncome * 0.1;
+          document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 300,000 threshold, so 10% of it is added to the tax. In your case, this is BDT ${0.1 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+        } else {
+          totalTax += 300000 * 0.1;
+          document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 300,000 threshold, so 10% of it is added to the tax. In your case, this is BDT ${0.1 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+          taxableIncome -= 300000;
+
+          if (taxableIncome <= 400000) {
+            totalTax += taxableIncome * 0.15;
+            document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 400,000 threshold, so 15% tax is added to it. In your case, this is BDT ${0.15 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+          } else {
+            totalTax += 400000 * 0.15;
+            document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 400,000 threshold, and 15% tax is added to it. In your case, this is BDT ${0.15 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+            taxableIncome -= 400000;
+
+            if (taxableIncome <= 500000) {
+              totalTax += taxableIncome * 0.2;
+              document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 500,000 threshold, and 20% tax is added to it. In your case, this is BDT ${0.20 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+            } else {
+              totalTax += 500000 * 0.2;
+              taxableIncome -= 500000;
+              document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 500,000 threshold, and 20% tax is added to it. In your case, this is BDT ${0.20 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+              // Calculate the remaining tax at 25%
+              if (taxableIncome > 1650000) {
+                totalTax += taxableIncome * 0.25;
+                document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 1,650,000 threshold, and 25% tax is added to it. In your case, this is BDT ${0.25 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li> `;
+              }
+            }
+          }
+        }
+      }
+
+      // Check if the user is eligible for the minimum tax
+      const minimumTax =
+        city_corporation === "dhaka" || city_corporation === "chattogram" ? 5000 :
+        city_corporation === "othercity" ? 4000 :
+        3000;
+
+      // Apply minimum tax if applicable
+      res = Math.max(minimumTax, totalTax);
+      if(res!== totalTax){
+      document.getElementById('breakdown-report').innerHTML += `<li>Based on your Corporation, you are subject to a minimum tax of BDT ${minimumTax}. Even though your taxable income is BDT ${taxableIncome}, the minimum tax for your region is BDT ${minimumTax}. Therefore, your total tax for this year is BDT ${minimumTax}.</li>`;
+
+      }
+      document.getElementById('breakdown-report').innerHTML += `Your total tax for this year comes to BDT ${totalTax}.`;
+
+      return totalTax;
+    }
   </script>
 </body>
 
