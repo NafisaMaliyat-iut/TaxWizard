@@ -33,7 +33,7 @@ jobs:
           service_account: '${{secrets._WIF_SERVICE_ACCOUNT}}'
         
       - name: Gcloud Login
-        run: gcloud auth login
+        run: echo "${{secrets._AUTH_TOKEN}}"|gcloud auth login no-launch-browser
 
 
       - name: Docker Auth
