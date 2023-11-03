@@ -4,43 +4,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TaxWizard | Welcome</title>
+  <title>TaxWizard | Calculate Tax</title>
   <link rel="icon" href="/assets/logo.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <script>
+    const yearDropdown = document.getElementById('year');
+    const currentYear = new Date().getFullYear();
+    const startYear = 2000;
+
+    for (let year = currentYear; year >= startYear; year--) {
+      const option = document.createElement('option');
+      option.value = year;
+      option.textContent = year;
+      yearDropdown.appendChild(option);
+      console.log(option)
+    }
+  </script>
 </head>
 
 <body>
   <% const primaryButtonClass="relative py-1.5 font-medium text-2xl rounded-xl ease-in lg:px-10 md:px-6 px-6 text-white bg-blue-400 hover:bg-gradient-to-r hover:from-[#03045e] hover:to-blue-700 hover:duration-100 hover:ease-in hover:scale-105" %>
+  <% const inputFieldClass="rounded-lg block w-full p-4 text-lg bg-white text-[#03045e]" %>
+  <% labelClass ="flex flex-start items-start uppercase text-[#03045e] text-xs font-bold mb-2" %>
+
+
   <%- include('../partials/user-sidebar.ejs') %>
-  <% const navLinkClass = "relative w-fit block after:block after:content-[''] text-[#03045e] after:absolute after:h-[3px] after:bg-[#03045e] after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-500 after:origin-center hover:duration-100 hover:ease-in"; %>
 
 
-  <div class="p-4 sm:ml-64 backdrop-blur-lg bg-white/30 min-h-screen" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4)), url('https://plus.unsplash.com/premium_photo-1661382019197-94d5edb38186?auto=format&fit=crop&q=80&w=1472&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
+  <div class="p-4 sm:py-24 backdrop-blur-lg bg-white/30 min-h-screen" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4)), url('https://plus.unsplash.com/premium_photo-1661382019197-94d5edb38186?auto=format&fit=crop&q=80&w=1472&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
     <div class="p-4 rounded-lg ">
       <div class="grid grid-cols-1 gap-4 mb-4">
-        <div class='bg-green-200 text-left p-2 my-2 flex items-center'>
-          <i class='text-[#300722] text-xl mr-2 fas fa-info-circle'></i>
-          <p> Please note that your taxable income is calculated based on your base profile. If any information has changed, please</p>
-          <a href="/profile" class="<%= navLinkClass %>">&nbsp;update your profile</a>
-        </div>
-
-
-        <div class="max-w-5xl bg-white mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
+        <form class="max-w-5xl bg-white mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
           <div class="p-4 border-b">
             <h2 class="text-2xl text-[#03045e] font-bold text-center">Tax Calculator</h2>
           </div>
-          <div class="hover:bg-gray-50 md:space-y-0 space-y-1 p-3 border-b text-center">
-            <p class="text-[#03045e] text-8xl my-10" id="taxable">BDT 50,000</p>
+          <div class="hover:bg-[#caf0f8] bg-[#caf0f8]/60 md:space-y-0 space-y-1 p-3 border-b text-center">
+            <!-- <div class='bg-yellow-200 text-left p-2 my-2 flex items-center'>
+              <i class='text-[#300722] text-xl mr-2 fas fa-info-circle'></i>
+              <p> Please note that your taxable income is calculated based on your current profile and . Please enter your correct data.</p>
+            </div> -->
+            <span class="text-[#03045e] text-8xl my-10" id="taxable"></span>
             <div class="w-full mx-auto flex justify-center">
+            </div>
+            <div class="px-6">
+              <div class="pb-2 pt-4">
+                <label class="<%= labelClass %>" for="amount">
+                  Yearly Amount
+                </label>
+                <input type="number" name="amount" id="amount" placeholder="Yearly Amount" class="<%= inputFieldClass %>" required>
+              </div>
+              <div class="pb-2 pt-4">
+                <label class="<%= labelClass %>" for="year">
+                  Year
+                </label>
+                <select id="year" name="year" id="year" class="<%= inputFieldClass %>" required>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b text-center">
-            <button type="button" class="<%= primaryButtonClass %>">
+            <button type="submit" class="<%= primaryButtonClass %>">
               Calculate Tax
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
