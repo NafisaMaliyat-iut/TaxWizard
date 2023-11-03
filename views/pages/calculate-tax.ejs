@@ -22,7 +22,7 @@
   <div class="p-4 sm:py-24 backdrop-blur-lg bg-white/30 min-h-screen" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4)), url('https://plus.unsplash.com/premium_photo-1661382019197-94d5edb38186?auto=format&fit=crop&q=80&w=1472&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
     <div class="p-4 rounded-lg ">
       <div class="grid grid-cols-1 gap-4 mb-4">
-        <form action="/calculateTax" method="post" class="max-w-5xl bg-white mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
+        <form method="POST"  id="calculate-data" class="max-w-5xl bg-white mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
           <div class="p-4 border-b">
             <h2 class="text-2xl text-[#03045e] font-bold text-center">Tax Calculator</h2>
           </div>
@@ -62,6 +62,49 @@
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const calculateData = document.getElementById('calculate-data');
+  
+      calculateData.addEventListener('submit', async (event) => {
+          event.preventDefault();
+  
+          const formData = new FormData(calculateData);
+  
+          try {
+              const response = await fetch('/calculateTax', {
+                  method: 'POST',
+                  body: JSON.stringify(Object.fromEntries(formData)),
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + localStorage.getItem('token'), 
+                  },
+              });
+  
+              const data = await response.json();
+  
+          } catch (error) {
+              console.error(error);
+          }
+      });
+  });
+  //  function calculate() { fetch('/calculateTax', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the JWT token here
+  //       },
+  //     })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(`Request failed with status: ${response.status}`);
+  //       }
+  //       return response.json(); // Parse the response body as JSON
+  //     })
+  //     .catch((error) => {
+  //       console.error('Calculation request failed:', error);
+  //       window.location.href = "/";
+  //     });}
+  </script>
 </body>
 
 </html>
