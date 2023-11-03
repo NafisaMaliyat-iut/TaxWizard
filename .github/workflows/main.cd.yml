@@ -8,7 +8,7 @@ on:
 env:
     PROJECT_ID: tax-worker
     GAR_LOCATION: us-west1
-    SERVICE: taxwizard-00001-qx5 
+    SERVICE: tax-worker
     REGION: us-west1
 
 jobs:
