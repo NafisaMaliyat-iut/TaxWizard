@@ -16,7 +16,7 @@ const taxSchema = new mongoose.Schema({
   },
   taxable_amount: {
     type: Number,
-    required: true,
+    required: false,
   },
 });
 
