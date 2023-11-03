@@ -31,6 +31,9 @@ jobs:
           token_format: 'access_token'
           workload_identity_provider: '${{secrets._WIF_PROVIDER}}' 
           service_account: '${{secrets._WIF_SERVICE_ACCOUNT}}'
+        
+      - name: Gcloud Login
+        run: gcloud auth login
 
 
       - name: Docker Auth
