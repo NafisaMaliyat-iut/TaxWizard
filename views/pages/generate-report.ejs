@@ -8,6 +8,32 @@
   <link rel="icon" href="/assets/logo.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <style type="text/css">
+    @media print {
+      body {
+        font-size: 12pt;
+        margin: 10;
+        padding: 10;
+      }
+
+      /* Define specific styles for the printed content */
+      #print-section {
+        /* Adjust margins and padding as needed */
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Hide elements that should not be printed */
+      header, footer, .no-print {
+        display: none;
+      }
+
+      /* Force a page break before certain elements */
+      .print-page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -50,77 +76,81 @@
             </form>
           </div>
         </div>
-        <section id="data" class="bg-white hidden mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
-          <div class="p-4 border-b flex items-center justify-between">
-            <h2 class="text-2xl text-[#03045e] font-bold">Tax Report</h2>
-            <div class="flex items-center">
-              <button type="button" onclick="" class="<%= highlightedButtonClass %>">
-                <i class="fa-solid fa-download mr-2"></i>
-                Download Report
-              </button>
-            </div>
-          </div>
-          <div>
-            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">Full name</p>
-              <p id="full_name"></p>
-            </div>
-            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">NID</p>
-              <p id="nid"></p>
-            </div>
-            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">Age</p>
-              <p id="age"></p>
-            </div>
-            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">Year</p>
-              <p id="curr_year"></p>
-            </div>
-            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">Yearly Income</p>
-              <p id="income"></p>
-            </div>
-            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">City Corporation</p>
-              <p id="city_corporation"></p>
-            </div>
-            <div class="md:grid hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">
-                We are transparent with our tax calculation. Here's a breakdown of your tax in <span id="selected-year"></span>.
-              </p>
-              <span>
-                Your tax free income is BDT&nbsp;
-                <span id="tax-free">350,000</span>.<br />
-                For the remaining BDT&nbsp;
-                <span id="remaining-amount"></span>, you were charged BDT&nbsp;
-                <span id="tax-percentage"></span><br />
-                After the tax deduction, your remaining amount is BDT&nbsp;
-                <span id="post-deducted"></span>.
-                <br />
-                Since your remaining amount comes to more than
-                <span id="additional-income-condition"></span>
-                , you are charged a 25% on your additional income which comes to BDT&nbsp;
-                <span id="extra-deducted"></span>
-                <span>
-                  <br />
-                  Thus total taxable comes to
-                  <span id="total-taxable"></span>
-                </span>
-              </span>
-              <div class="font-bold">All our tax calculations are done according to the Bangladesh Tax Act of 2023.
+
+
+
+
+
+
+
+
+        <div id="print-section">
+          <section id="data" class="bg-white hidden mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
+            <div class="p-4 border-b flex items-center justify-between">
+              <h2 class="text-2xl text-[#03045e] font-bold">Tax Report</h2>
+              <div class="flex items-center">
+                <button id="downloadbutton" button type="button" onclick="printSection('print-section')" class="<%= highlightedButtonClass %>">
+                  <i class="fa-solid fa-download mr-2"></i>
+                  Download Report
+                </button>
               </div>
             </div>
-
-        </section>
-        <section id="no-data" class="bg-white hidden mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
-          <div>
-            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">No Data Found For This Year</p>
-              <p id="city_corporation"></p>
+            <div>
+              <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-[#03045e] text-lg">Full name</p>
+                <p id="full_name"></p>
+              </div>
+              <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-[#03045e] text-lg">NID</p>
+                <p id="nid"></p>
+              </div>
+              <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-[#03045e] text-lg">Age</p>
+                <p id="age"></p>
+              </div>
+              <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-[#03045e] text-lg">Year</p>
+                <p id="curr_year"></p>
+              </div>
+              <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-[#03045e] text-lg">Yearly Income</p>
+                <p id="income"></p>
+              </div>
+              <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-[#03045e] text-lg">City Corporation</p>
+                <p id="city_corporation"></p>
+              </div>
+              <div class="md:grid hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b text-[#03045e]">
+                <p class="text-lg">
+                  We are transparent with our tax calculation. Here's a breakdown of your tax in&nbsp;<span class="font-bold" id="selected-year"></span>.
+                </p>
+                <br />
+                <div id="breakdown-report"></div>
+                <br />
+                <div class="font-bold">All our tax calculations are done according to the Bangladesh Tax Act of 2023.
+                </div>
+              </div>
+  
+          </section>
+          <section id="no-data" class="bg-white hidden mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
+            <div>
+              <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-[#03045e] text-lg">No Data Found For This Year</p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
       </div>
     </div>
   </div>
@@ -145,7 +175,7 @@
 
           const data = await response.json();
           console.log(data);
-          if (data.taxPayer[0] || data.user || data.taxPayer[0].length === 0 || data.user.length === 0) {
+          if (!data.taxPayer[0] || !data.user || data.taxPayer[0].length === 0 || data.user.length === 0) {
             document.getElementById('no-data').classList.remove('hidden');
           } else {
             const dataTable = document.getElementById('data');
@@ -156,14 +186,98 @@
             document.getElementById('curr_year').innerText = data.taxPayer[0].year || "N/A";
             document.getElementById('income').innerText = data.taxPayer[0].yearly_amount || "N/A";
             document.getElementById('city_corporation').innerText = data.user.city_corporation || "N/A";
+            document.getElementById('selected-year').innerText = data.taxPayer[0].year || "N/A";
           }
-
-          // Update the DOM with the response data here
+          calculateTax(data.taxPayer[0].yearly_amount, data.user.gender, data.user.age, data.user.city_corporation);
         } catch (error) {
           console.log(error);
         }
       });
     });
+  </script>
+  <script>
+    function calculateTax(income, gender, age, city_corporation) {
+      const taxFreeIncome = gender === "female" || age > 65 ? 400000 : 350000;
+      document.getElementById('breakdown-report').innerHTML += `<li>Your tax-free income (the amount you can earn without having to pay for any taxes) is BDT ${taxFreeIncome}.</li>`;
+
+      income = parseFloat(income);
+      let taxableIncome = income - taxFreeIncome;
+
+      if (taxableIncome <= 0) {
+        document.getElementById('breakdown-report').innerHTML += `<li>Since your yearly income BDT ${income} did not exceed the tax-free income, your taxable amount for this year is at <strong>BDT 0</strong>.</li>`;
+        return;
+      }
+
+      document.getElementById('breakdown-report').innerHTML += `<li>Your yearly income exceeds the tax-free income, your taxable amount for this year is at BDT ${taxableIncome}.</li>`;
+
+      let totalTax = 0;
+
+      if (taxableIncome <= 100000) {
+        totalTax = taxableIncome * 0.05;
+        document.getElementById('breakdown-report').innerHTML += `<li>Your taxable amount BDT ${taxableIncome} exceeds the BDT 100,000 threshold, so your total tax is 5% of your taxable income. In your case, this is BDT ${totalTax}.</li>`;
+      } else {
+        totalTax += 100000 * 0.05;
+        document.getElementById('breakdown-report').innerHTML += `<li>Your taxable amount BDT ${taxableIncome} reaches the BDT 100,000 threshold, 5% of it is added to tax. In your case, this is BDT ${0.05*taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+        taxableIncome -= 100000;
+
+        if (taxableIncome <= 300000) {
+          totalTax += taxableIncome * 0.1;
+          document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 300,000 threshold, so 10% of it is added to the tax. In your case, this is BDT ${0.1 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+        } else {
+          totalTax += 300000 * 0.1;
+          document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 300,000 threshold, so 10% of it is added to the tax. In your case, this is BDT ${0.1 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+          taxableIncome -= 300000;
+
+          if (taxableIncome <= 400000) {
+            totalTax += taxableIncome * 0.15;
+            document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 400,000 threshold, so 15% tax is added to it. In your case, this is BDT ${0.15 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+          } else {
+            totalTax += 400000 * 0.15;
+            document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 400,000 threshold, and 15% tax is added to it. In your case, this is BDT ${0.15 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+            taxableIncome -= 400000;
+
+            if (taxableIncome <= 500000) {
+              totalTax += taxableIncome * 0.2;
+              document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 500,000 threshold, and 20% tax is added to it. In your case, this is BDT ${0.20 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+            } else {
+              totalTax += 500000 * 0.2;
+              taxableIncome -= 500000;
+              document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 500,000 threshold, and 20% tax is added to it. In your case, this is BDT ${0.20 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li>`;
+              // Calculate the remaining tax at 25%
+              if (taxableIncome > 1650000) {
+                totalTax += taxableIncome * 0.25;
+                document.getElementById('breakdown-report').innerHTML += `<li>You have an additional BDT ${taxableIncome} taxable income which exceeds the BDT 1,650,000 threshold, and 25% tax is added to it. In your case, this is BDT ${0.25 * taxableIncome}. Your total tax now stands at BDT ${totalTax}.</li> `;
+              }
+            }
+          }
+        }
+      }
+
+      // Check if the user is eligible for the minimum tax
+      const minimumTax =
+        city_corporation === "dhaka" || city_corporation === "chattogram" ? 5000 :
+        city_corporation === "othercity" ? 4000 :
+        3000;
+
+      // Apply minimum tax if applicable
+      res = Math.max(minimumTax, totalTax);
+      if(res!== totalTax){
+      document.getElementById('breakdown-report').innerHTML += `<li>Based on your Corporation, you are subject to a minimum tax of BDT ${minimumTax}. Even though your taxable income is BDT ${taxableIncome}, the minimum tax for your region is BDT ${minimumTax}. Therefore, your total tax for this year is BDT ${minimumTax}.</li>`;
+
+      }
+      document.getElementById('breakdown-report').innerHTML += `Your total tax for this year comes to BDT ${totalTax}.`;
+
+      return totalTax;
+    }
+    function printSection(sectionId) {
+      const printContent = document.getElementById(sectionId);
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContent.innerHTML;
+      document.getElementById('downloadbutton').style.display = 'none';
+      window.print();
+      //make the downdload button invisible
+      document.body.innerHTML = originalContents;
+    }
   </script>
 </body>
 
