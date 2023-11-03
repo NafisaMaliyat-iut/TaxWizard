@@ -21,6 +21,8 @@
   <div class="p-4 sm:py-24">
     <div class="p-4 rounded-lg ">
       <div class="grid grid-cols-1 gap-4 mb-4">
+        <% if (typeof user !== 'undefined' && user) { %>
+          <% console.log(user) } %>
 
         <div class="hover:bg-[#caf0f8] bg-[#caf0f8]/60 rounded-xl md:space-y-0 space-y-1 p-3 border-b text-center">
           <!-- <div class='bg-yellow-200 text-left p-2 my-2 flex items-center'>
@@ -35,25 +37,15 @@
               <label class="<%= labelClass %>" for="year">
                 Select A Year
               </label>
-
-
-              <form method="POST" id="year-data">
-                <select id="year" name="year" class="<%= inputFieldClass %> origin-bottom bottom-0" required>
-                  <% for (let year = new Date().getFullYear(); year >= 2010; year--) { %>
-                  <option value="<%= year %>"><%= year %></option>
-                  <% } %>
-                </select>
-                <div class="flex mt-4 items-center">
-                  <button type="submit" onclick="" class="<%= primaryButtonClass %>">
-                    Generate
-                  </button>
-                </div>
-              </form>
-              
-
-
-
-              
+              <select id="year" name="year" class="<%= inputFieldClass %> origin-bottom bottom-0" required>
+                <% for (let year = new Date().getFullYear(); year >= 2010; year--) { %>
+                <option value="<%= year %>"><%= year %></option>
+                <% } %>
+              </select>
+              <div class="flex mt-4 items-center">
+                <button type="button" onclick="" class="<%= primaryButtonClass %>">
+                  Generate
+                </button>
               </div>
             </div>
           </div>
@@ -130,34 +122,6 @@
       </div>
     </div>
   </div>
-  <script defer>
-    document.addEventListener('DOMContentLoaded', () => {
-      const calculateData = document.getElementById('year-data');
-      console.log("I am triggered");
-      calculateData.addEventListener('submit', async (event) => {
-          event.preventDefault();
-  
-          const formData = new FormData(calculateData);
-  
-          try {
-              const response = await fetch('/report', {
-                  method: 'POST',
-                  body: JSON.stringify(Object.fromEntries(formData)),
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + localStorage.getItem('token'), 
-                  },
-              });
-  
-              const data = await response.json();
-              
-              // Update the DOM with the response data here
-          } catch (error) {
-              console.error(error);
-          }
-      });
-    });
-  </script>
 </body>
 
 </html>
