@@ -20,6 +20,14 @@ const getCalculateTaxPage = async (req, res) => {
   }
 };
 
+const getGenerateReportPage = async (req, res) => {
+  try {
+    return res.status(200).render("pages/generate-report");
+  } catch (error) {
+    return res.status(404).render("error404");
+  }
+};
+
 module.exports = {
-  getHomePage, getCalculateTaxPage,
+  getHomePage, getCalculateTaxPage,getGenerateReportPage,
 };

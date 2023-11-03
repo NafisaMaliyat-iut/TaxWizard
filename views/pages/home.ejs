@@ -9,57 +9,43 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script>
-    console.log(localStorage.getItem('token'));
-    fetch('/profile-information', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the JWT token here
-        },
-      })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
-        }
-        return response.json(); // Parse the response body as JSON
-      })
-      .then((data) => {
-        document.getElementById('nid').innerText = data.nid;
-        document.getElementById('full_name').innerText = data.full_name;
-        document.getElementById('age').innerText = data.age;
-        document.getElementById('gender').innerText = data.gender;
-        document.getElementById('city_corporation').innerText = data.city_corporation;
-      })
-      .catch((error) => {
-        console.error('Profile request failed:', error);
-        window.location.href = "/";
-      });
+    // console.log(localStorage.getItem('token'));
+    // fetch('/profile-information', {
+    //     method: 'GET',
+    //     headers: {
+    //       'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the JWT token here
+    //     },
+    //   })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error(`Request failed with status: ${response.status}`);
+    //     }
+    //     return response.json(); // Parse the response body as JSON
+    //   })
+    //   .then((data) => {
+    //     document.getElementById('nid').innerText = data.nid;
+    //     document.getElementById('full_name').innerText = data.full_name;
+    //     document.getElementById('age').innerText = data.age;
+    //     document.getElementById('gender').innerText = data.gender;
+    //     document.getElementById('city_corporation').innerText = data.city_corporation;
+    //   })
+    //   .catch((error) => {
+    //     console.error('Profile request failed:', error);
+    //     window.location.href = "/";
+    //   });
   </script>
 </head>
 
 <body>
   <%- include('../partials/user-sidebar.ejs') %>
   <% const primaryButtonClass="relative py-1.5 font-medium text-2xl rounded-xl ease-in lg:px-10 md:px-6 px-6 text-white bg-blue-400 hover:bg-gradient-to-r hover:from-[#03045e] hover:to-blue-700 hover:duration-100 hover:ease-in hover:scale-105" %>
+  <% const inputFieldClass="rounded-lg block w-full p-4 text-lg bg-white text-[#03045e]" %>
+  <% labelClass ="flex flex-start items-start uppercase text-[#03045e] text-xs font-bold mb-2" %>
 
-  <div class="p-4 sm:ml-64">
+  <div class="p-4 sm:py-24">
     <div class="p-4 rounded-lg ">
       <div class="grid grid-cols-1 gap-4 mb-4">
-        <!-- start of cards  -->
-
-        <div class="max-w-5xl mb-6">
-          <div class=" col-span-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
-            <%- include('../partials/home-cards.ejs', {
-                cardImageUrl: 'https://plus.unsplash.com/premium_photo-1678374803542-cc8aa0ae28b1?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                cardTitle: 'Calculate Your Tax',
-                cardLink: '/calculate',
-            }) %>
-            <%- include('../partials/home-cards.ejs', {
-                cardImageUrl: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&q=80&w=1474&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                cardTitle: 'Generate Tax Report',
-                cardLink: '/report',
-            }) %>
-          </div>
-        </div>
-        <div class="max-w-5xl bg-white mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
+        <section id="home" class=" bg-white mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
           <div class="p-4 border-b">
             <h2 class="text-2xl text-[#03045e] font-bold">User Information</h2>
           </div>
@@ -84,14 +70,10 @@
               <p class="text-[#03045e] text-lg">City Corporation</p>
               <p id="city_corporation"></p>
             </div>
-            <!-- <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-              <p class="text-[#03045e] text-lg">Yearly Income</p>
-              <p id="">user's yearly income</p>
-            </div> -->
           </div>
-        </div>
-      </div>
+      </div>      
     </div>
+  </div>
   </div>
 
 </body>
