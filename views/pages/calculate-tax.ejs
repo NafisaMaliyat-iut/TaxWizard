@@ -8,19 +8,6 @@
   <link rel="icon" href="/assets/logo.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <script>
-    const yearDropdown = document.getElementById('year');
-    const currentYear = new Date().getFullYear();
-    const startYear = 2000;
-
-    for (let year = currentYear; year >= startYear; year--) {
-      const option = document.createElement('option');
-      option.value = year;
-      option.textContent = year;
-      yearDropdown.appendChild(option);
-      console.log(option)
-    }
-  </script>
 </head>
 
 <body>
@@ -50,7 +37,7 @@
             <div class="px-6">
               <div class="pb-2 pt-4">
                 <label class="<%= labelClass %>" for="amount">
-                  Yearly Amount
+                  Yearly Amount (in BDT)
                 </label>
                 <input type="number" name="amount" id="amount" placeholder="Yearly Amount" class="<%= inputFieldClass %>" required>
               </div>
@@ -58,11 +45,10 @@
                 <label class="<%= labelClass %>" for="year">
                   Year
                 </label>
-                <select id="year" name="year" id="year" class="<%= inputFieldClass %>" required>
-                  <option value="2013">2013</option>
-                  <option value="2014">2014</option>
-                  <option value="2015">2015</option>
-                  <option value="2016">2016</option>
+                <select id="year" name="year" class="<%= inputFieldClass %> origin-bottom bottom-0" required>
+                  <% for (let year = new Date().getFullYear(); year >= 2010; year--) { %>
+                  <option value="<%= year %>"><%= year %></option>
+                  <% } %>
                 </select>
               </div>
             </div>
