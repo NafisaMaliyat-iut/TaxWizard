@@ -13,22 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+module "github-actions-runners" {
+  source  = "terraform-google-modules/github-actions-runners/google"
+  version = "3.1.2"
+}
+
+provider "google" {
+  project = var.gcp_project_id
+  credentials = var.gcp_credentials
+  region = var.gcp_region
+  zone = var.gcp_zone
+}
+provider "google-beta" {
+  project = var.gcp_project_id
+  credentials = var.gcp_credentials
+  region = var.gcp_region
+  zone = var.gcp_zone
+}
 
 
 resource "google_service_account" "sa" {
-  project    = var.project_id
+  project    = var.gcp_project_id
   account_id = "test-storage-sa"
 }
 
 resource "google_project_iam_member" "project" {
-  project = var.project_id
+  project = var.gcp_project_id
   role    = "roles/storage.admin"
   member  = "serviceAccount:${google_service_account.sa.email}"
 }
 
 module "oidc" {
-  source      = "./modules/gh-oidc"
-  project_id  = var.project_id
+  source      = "./.terraform/modules/github-actions-runners/modules/gh-oidc"
+  project_id  = var.gcp_project_id
   pool_id     = "taxworker-pool"
   provider_id = "taxworker-gh-provider"
   sa_mapping = {
