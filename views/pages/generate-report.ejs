@@ -12,9 +12,7 @@
 
 <body>
   <% const inputFieldClass="rounded-lg block w-full p-4 text-lg bg-white text-[#03045e]" %>
-  <% const
-      primaryButtonClass="relative py-2 font-medium text-2xl rounded-xl ease-in lg:px-10 md:px-6 px-6 text-white bg-blue-400 hover:bg-gradient-to-r hover:from-[#03045e] hover:to-blue-700 hover:duration-100 hover:ease-in hover:scale-105"
-      %>
+  <% const primaryButtonClass="relative py-1.5 font-medium text-2xl rounded-xl ease-in lg:px-8 md:px-6 px-6 text-white bg-blue-400 hover:bg-gradient-to-r hover:from-[#03045e] hover:to-blue-700 hover:duration-100 hover:ease-in hover:scale-105" %>
   <% labelClass ="flex flex-start items-start uppercase text-[#03045e] text-xs font-bold mb-2" %>
 
 
@@ -22,20 +20,94 @@
   <div class="p-4 sm:py-24">
     <div class="p-4 rounded-lg ">
       <div class="grid grid-cols-1 gap-4 mb-4">
-        <section id="home" class=" bg-white mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
-          <div class="p-4 border-b">
-            <h2 class="text-2xl text-[#03045e] font-bold">Tax Report</h2>
+
+        <div class="hover:bg-[#caf0f8] bg-[#caf0f8]/60 rounded-xl md:space-y-0 space-y-1 p-3 border-b text-center">
+          <!-- <div class='bg-yellow-200 text-left p-2 my-2 flex items-center'>
+            <i class='text-[#300722] text-xl mr-2 fas fa-info-circle'></i>
+            <p> Please note that your taxable income is calculated based on your current profile and . Please enter your correct data.</p>
+          </div> -->
+          <span class="text-[#03045e] text-8xl my-10" id="taxable"></span>
+          <div class="w-full mx-auto flex justify-center">
           </div>
-          <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+          <div class="px-6">
             <div class="pb-2 pt-4">
               <label class="<%= labelClass %>" for="year">
-                Date
+                Select A Year
               </label>
-              <select id="year" name="year" class="<%= inputFieldClass %>" required>
+              <select id="year" name="year" class="<%= inputFieldClass %> origin-bottom bottom-0" required>
+                <% for (let year = new Date().getFullYear(); year >= 2010; year--) { %>
+                <option value="<%= year %>"><%= year %></option>
+                <% } %>
               </select>
             </div>
           </div>
+        </div>
+        <section id="home" class="bg-white mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
+          <div class="p-4 border-b flex items-center justify-between">
+            <h2 class="text-2xl text-[#03045e] font-bold">Tax Report</h2>
+            <div class="flex items-center">
+              <button type="button" onclick="" class="<%= primaryButtonClass %>">
+                Download Detailed Report
+              </button>
+            </div>
+          </div>
+          <div id="data">
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+              <p class="text-[#03045e] text-lg">Full name</p>
+              <p id="full_name"></p>
+            </div>
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+              <p class="text-[#03045e] text-lg">NID</p>
+              <p id="nid"></p>
+            </div>
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+              <p class="text-[#03045e] text-lg">Age</p>
+              <p id="age"></p>
+            </div>
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+              <p class="text-[#03045e] text-lg">Year</p>
+              <p id="year"></p>
+            </div>
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+              <p class="text-[#03045e] text-lg">Yearly Income</p>
+              <p id="income"></p>
+            </div>
+            <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+              <p class="text-[#03045e] text-lg">City Corporation</p>
+              <p id="city_corporation"></p>
+            </div>
+            <div class="md:grid hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+              <p class="text-[#03045e] text-lg">
+                We are transparent with our tax calculation. Here's a breakdown of your tax in <span id="selected-year"></span>.
+              </p>
+              <span>
+                Your tax free income is BDT&nbsp;
+                <span id="tax-free">350,000</span>.<br/>
+                For the remaining BDT&nbsp;
+                <span id="remaining-amount"></span>, you were charged BDT&nbsp;
+                <span id="tax-percentage"></span><br/>
+                After the tax deduction, your remaining amount is BDT&nbsp;
+                <span id="post-deducted"></span>.
+                <br/>
+                  Since your remaining amount comes to more than
+                  <span id="additional-income-condition"></span>
+                  , you are charged a 25% on your additional income which comes to BDT&nbsp;
+                  <span id="extra-deducted"></span>
+                <span>
+                  <br/>
+                  Thus total taxable comes to
+                  <span id="total-taxable"></span>
+                </span>
+              </span>
+            </div>
+            <div id="no-data" class="hidden">
+              <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                <p class="text-[#03045e] text-lg">No Data Found For This Year</p>
+                <p id="city_corporation"></p>
+              </div>
+            </div>
         </section>
+
       </div>
     </div>
   </div>
