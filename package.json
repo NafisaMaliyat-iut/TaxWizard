@@ -6,12 +6,15 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon -L server.js",
-    "test": "jest --runInBand --detectOpenHandles"
+    "test": "jest --runInBand --detectOpenHandles",
+    "build-tailwind:css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/style.css",
+    "tailwind:css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/style.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer": "^10.4.16",
     "bcrypt": "^5.1.1",
     "chai": "^4.3.10",
     "cookie-parser": "^1.4.6",
@@ -33,7 +36,10 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "pm2": "^5.3.0",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
     "supertest": "^6.3.3",
+    "tailwindcss": "^3.3.5",
     "uuid": "^9.0.1"
   }
 }
