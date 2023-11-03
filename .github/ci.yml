@@ -35,6 +35,9 @@ jobs:
     - name: Set up node environment variables
       run: echo "_NODE_ENV=${{ vars._NODE_ENV }}" >> $GITHUB_ENV
 
+    - name: Set up port environment variables
+      run: echo "_PORT=${{ vars._PORT }}" >> $GITHUB_ENV
+
     - name: Set up secrets
       run: echo "_JWT_SECRET=${{ secrets._JWT_SECRET }}" >> $GITHUB_ENV
 
