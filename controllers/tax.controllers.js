@@ -16,15 +16,13 @@ const getHomePage = async (req, res) => {
 
 const getCalculateTaxPage = async (req, res) => {
   try {
-      return res
+    return res
       .status(200)
       .render("pages/calculate-tax");
   } catch (error) {
     return res.status(404).render("error404");
   }
 };
-
-
 
 const postCalculateTax = async (req, res) => {
   try {
@@ -106,17 +104,23 @@ const postCalculateTax = async (req, res) => {
     const age = user.age; // Assuming user.age is the user's age
 
     // Calculate the tax
-    const taxAmount = calculatetax(yearly_amount, gender, age);
-    const taxPayer=await taxDB.findOne({nid:user.nid,year:year});
+    const taxAmount = calculatetax(
+      yearly_amount,
+      gender,
+      age
+    );
+    const taxPayer = await taxDB.findOne({
+      nid: user.nid,
+      year: year,
+    });
     console.log(taxPayer);
 
-    if(taxPayer){
+    if (taxPayer) {
       //update the taxpayer objects yearly_amount and taxable_amount
-      taxPayer.yearly_amount=yearly_amount;
-      taxPayer.taxable_amount=taxAmount;
+      taxPayer.yearly_amount = yearly_amount;
+      taxPayer.taxable_amount = taxAmount;
       await taxPayer.save();
-    }
-    else{
+    } else {
       const tax = await taxDB.create({
         nid: user.nid,
         year: year,
@@ -125,9 +129,13 @@ const postCalculateTax = async (req, res) => {
       });
       await tax.save();
     }
-    return res.status(200).json({message:"Tax calculated successfully"});
-  } 
-  catch (error) {
+    return res
+      .status(200)
+      .json({
+        message: "Tax calculated successfully",
+        taxable: taxAmount,
+      });
+  } catch (error) {
     console.log(error);
     return res
       .status(500)
@@ -135,39 +143,47 @@ const postCalculateTax = async (req, res) => {
   }
 };
 
-const getGenerateReportPage = async (req, res) => {
+const getGenerateReportPage = async (
+  req,
+  res
+) => {
   try {
     console.log(req.body);
     return res
       .status(200)
       .render("pages/generate-report");
-  } 
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
-}
+};
 
-const postGenerateReportPage = async (req, res) => {
+const postGenerateReportPage = async (
+  req,
+  res
+) => {
   try {
-    const {year} = req.body;
+    const { year } = req.body;
     const userid = req.user.id;
-    console.log(userid,year);
+    console.log(userid, year);
     //fetch data from user
-    const user=await User.findById(userid);
+    const user = await User.findById(userid);
     console.log(user);
     //fetch data from taxDB
-    const taxPayer=await taxDB.find({nid:user.nid,year:year});
+    const taxPayer = await taxDB.find({
+      nid: user.nid,
+      year: year,
+    });
     console.log(taxPayer);
     //send user data and taxPayer data to generate-report page
-  return res
-  .status(200)
-  .render("pages/generate-report", { user: user, taxPayer: taxPayer });
-
-  } 
-  catch (error) {
-    return res.status(404).json({ error: error.message });
+    return res
+      .status(200)
+      .json({ user: user, taxPayer: taxPayer });
+  } catch (error) {
+    return res
+      .status(404)
+      .json({ error: error.message });
   }
-}
+};
 
 const getGenerateReportInfo = async (
   req,
@@ -180,5 +196,5 @@ module.exports = {
   postCalculateTax,
   getGenerateReportPage,
   getGenerateReportInfo,
-  postGenerateReportPage
+  postGenerateReportPage,
 };
