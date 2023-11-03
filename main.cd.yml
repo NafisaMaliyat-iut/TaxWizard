@@ -8,11 +8,15 @@ on:
 env:
     PROJECT_ID: tax-worker
     GAR_LOCATION: us-west1
-    SERVICE: taxwizard-00001-qx5 
+    SERVICE: tax-worker
     REGION: us-west1
 
 jobs:
   on-success:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+      
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
