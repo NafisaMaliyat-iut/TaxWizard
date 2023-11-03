@@ -1422,6 +1422,11 @@ video {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+
+  .md\:text-7xl {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
 }
 
 @media (min-width: 1024px) {
