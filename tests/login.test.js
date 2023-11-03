@@ -1,38 +1,44 @@
 require('dotenv').config();
 const request = require('supertest');
+const mongoose=require('mongoose');
 const app = require('../app');
+const server = require('../server');
+const User = require('../models/user.model');
+const bcrypt = require('bcrypt');
+const connectToDatabase = require('../config/db_connection');
 
-describe('POST /login', () => {
-    test('should return a 200 status code and a success message when valid email and password are provided', async () => {
-        const res = await request(app)
-            .post('/login')
-            .send({
-                email: 'testuser@example.com',
-                password: 'testpassword'
-            });
-        expect(res.statusCode).toEqual(200);
-        expect(res.body.message).toEqual('Login successful');
-    });
+describe('POST /loginUser', () => {
+    beforeAll(async () => {
+        await mongoose.connection.close();
+        await connectToDatabase(process.env._MONGO_URI, "test");
+      },25000)
 
-    test('should return a 401 status code and an error message when invalid email is provided', async () => {
-        const res = await request(app)
-            .post('/login')
-            .send({
-                email: 'invalidemail',
-                password: 'testpassword'
-            });
-        expect(res.statusCode).toEqual(401);
-        expect(res.body.message).toEqual('Invalid email or password');
-    });
+      afterAll(async () => {
+        await server.close();
+        await mongoose.connection.collections.users.drop();
+        await Promise.all(mongoose.connections.map(con => con.close()));
+      }, 25000);
 
-    test('should return a 401 status code and an error message when invalid password is provided', async () => {
-        const res = await request(app)
-            .post('/login')
-            .send({
-                email: 'testuser@example.com',
-                password: 'invalidpassword'
-            });
-        expect(res.statusCode).toEqual(401);
-        expect(res.body.message).toEqual('Invalid email or password');
+
+    test('should login a user', async () => {
+        const user = {
+            nid: '1234567890123',
+            password: 'password123'
+        };
+         const newUser = {
+                nid: '1234567890123',
+                password: 'password123',
+                full_name: 'John Doe',
+                age: 30,
+                gender: 'male',
+                city_corporation: 'dhaka'
+            };
+            await request(app)
+                .post('/registerUser')
+                .send(newUser)
+        await request(app)
+            .post('/loginUser')
+            .send(user)
+            .expect(200);
     });
 });

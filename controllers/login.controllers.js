@@ -13,7 +13,21 @@ const getLogin=async(req,res)=>{
     }
 }
 
+const loginUser=async(req,res)=>{
+    try{
+        const {nid,password} = req.body;
+        const userdummy={nid,password};
+        const token=await user.login(userdummy);
+        res.status(200).json({success:true,token:token,redirectTo:'/home'});
+    }
+    catch(error){
+        // return res.status(404).render('error404');
+        return res.status(404).json({error:error.message});
+    }
+}
+
 //export module
 module.exports = {
-    getLogin
+    getLogin,
+    loginUser
 }
