@@ -47,22 +47,19 @@
       <div class="grid grid-cols-1 gap-4 mb-4">
         <!-- start of cards  -->
 
-        <div class=" col-span-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <%- include('../partials/home-cards.ejs', {
+        <div class="max-w-5xl mb-6">
+          <div class=" col-span-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
+            <%- include('../partials/home-cards.ejs', {
                 cardImageUrl: 'https://plus.unsplash.com/premium_photo-1678374803542-cc8aa0ae28b1?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
                 cardTitle: 'Calculate Your Tax',
                 cardLink: '/calculate',
             }) %>
-          <%- include('../partials/home-cards.ejs', {
+            <%- include('../partials/home-cards.ejs', {
                 cardImageUrl: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&q=80&w=1474&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
                 cardTitle: 'Generate Tax Report',
                 cardLink: '/report',
             }) %>
-          <%- include('../partials/home-cards.ejs', {
-                cardImageUrl: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                cardTitle: 'Update Your Profile',
-                cardLink: '/profile',
-            }) %>
+          </div>
         </div>
         <div class="max-w-5xl bg-white mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
           <div class="p-4 border-b">
