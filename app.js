@@ -14,7 +14,9 @@ app.use(express.static('public'));
 
 const public_routes = require("./routes/public.routes");
 const register_routes = require("./routes/register.routes");
+const login_routes = require("./routes/login.routes");
 app.use(public_routes)
 app.use(register_routes)
+app.use(login_routes)
 
 module.exports = app;
