@@ -5,13 +5,13 @@ const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 
 describe('POST /registerUser', () => {
-    // beforeAll(async () => {
-    //     await User.deleteMany({});
-    // }); // Set a larger timeout (e.g., 10 seconds) if needed.
+    beforeAll(async () => {
+        await User.deleteMany({});
+    });
 
-    // afterEach(async () => {
-    //     await User.deleteMany({});
-    // }); // Set a larger timeout (e.g., 10 seconds) if needed.
+    afterEach(async () => {
+        await User.deleteMany({});
+    }); 
 
     test('should register a new user', async () => {
         const newUser = {
@@ -35,7 +35,7 @@ describe('POST /registerUser', () => {
 
         const isPasswordMatch = await bcrypt.compare(newUser.password, user.password);
         expect(isPasswordMatch).toBe(true);
-    }); // Set a larger timeout (e.g., 10 seconds) if needed.
+    }); 
 
     test('should not register a new user with invalid data', async () => {
         const newUser = {
@@ -53,7 +53,7 @@ describe('POST /registerUser', () => {
             .expect(400);
 
         expect(response.body.message).toBe('User validation failed: age: Cast to Number failed for value "invalid" at path "age"');
-    }); // Set a larger timeout (e.g., 10 seconds) if needed.
+    }); 
 
     test('should not register a new user with existing NID', async () => {
         const existingUser = {
@@ -81,5 +81,5 @@ describe('POST /registerUser', () => {
             .expect(400);
 
         expect(response.body.message).toBe('NID already exists');
-    }); // Set a larger timeout (e.g., 10 seconds) if needed.
+    }); 
 });
