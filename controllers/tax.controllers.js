@@ -24,6 +24,8 @@ const getCalculateTaxPage = async (req, res) => {
   }
 };
 
+
+
 const postCalculateTax = async (req, res) => {
   try {
     const { yearly_amount, year } = req.body;
@@ -123,25 +125,6 @@ const postCalculateTax = async (req, res) => {
       });
       await tax.save();
     }
-
-    // if(taxPayer.year === year){
-    //   //Update database instance if year is same
-    //   const tax = await taxDB.findOneAndUpdate(
-    //     { nid: user.nid, year: year },
-    //     { yearly_amount: yearly_amount, taxable_amount: taxAmount },
-    //     { new: true }
-    //   );
-    // }
-    // else if(user.yaer !== year){
-    //   //Create new database instance if year is different
-    //   const tax = await taxDB.create({
-    //     nid: user.nid,
-    //     year: year,
-    //     yearly_amount: yearly_amount,
-    //     taxable_amount: taxAmount,
-    //   });
-    //   await tax.save();
-    // } 
     return res.status(200).json({message:"Tax calculated successfully"});
   } 
   catch (error) {
@@ -152,18 +135,39 @@ const postCalculateTax = async (req, res) => {
   }
 };
 
-const getGenerateReportPage = async (
-  req,
-  res
-) => {
+const getGenerateReportPage = async (req, res) => {
   try {
+    console.log(req.body);
     return res
       .status(200)
       .render("pages/generate-report");
-  } catch (error) {
-    return res.status(404).render("error404");
+  } 
+  catch (error) {
+    console.log(error);
   }
-};
+}
+
+const postGenerateReportPage = async (req, res) => {
+  try {
+    const {year} = req.body;
+    const userid = req.user.id;
+    console.log(userid,year);
+    //fetch data from user
+    const user=await User.findById(userid);
+    console.log(user);
+    //fetch data from taxDB
+    const taxPayer=await taxDB.find({nid:user.nid,year:year});
+    console.log(taxPayer);
+    //send user data and taxPayer data to generate-report page
+  return res
+  .status(200)
+  .render("pages/generate-report", { user: user, taxPayer: taxPayer });
+
+  } 
+  catch (error) {
+    return res.status(404).json({ error: error.message });
+  }
+}
 
 const getGenerateReportInfo = async (
   req,
@@ -176,4 +180,5 @@ module.exports = {
   postCalculateTax,
   getGenerateReportPage,
   getGenerateReportInfo,
+  postGenerateReportPage
 };

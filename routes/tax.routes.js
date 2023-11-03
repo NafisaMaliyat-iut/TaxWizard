@@ -3,7 +3,7 @@ const route = require("express").Router();
 const passport = require("passport");
 const { getprofile } = require("../controllers/profile.controllers.js");
 const {
-  getHomePage, getCalculateTaxPage, postCalculateTax, getGenerateReportPage, getGenerateReportInfo
+  getHomePage, getCalculateTaxPage, postCalculateTax, getGenerateReportPage, getGenerateReportInfo, postGenerateReportPage
 } = require("../controllers/tax.controllers.js");
 
 
@@ -14,4 +14,5 @@ route.get("/calculate", getCalculateTaxPage);
 route.post("/calculateTax",passport.authenticate('jwt',{session:false}), postCalculateTax);
 route.post("/generateReport",passport.authenticate('jwt',{session:false}), getGenerateReportInfo);
 route.get("/report", getGenerateReportPage);
+route.post("/report",passport.authenticate('jwt',{session:false}), postGenerateReportPage);
 module.exports = route;
