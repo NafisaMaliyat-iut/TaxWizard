@@ -14,7 +14,7 @@ const registerUser = async (req, res) => {
             nid,email,password:hashedPassword,full_name, age,city_corporation
         });
         await user.save();
-        res.status(201).json({ message: "User created successfully" });
+        return res.status(200).render('pages/login',{message:"User created successfully"});
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
