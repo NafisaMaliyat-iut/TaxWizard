@@ -134,3 +134,4 @@ dist
 terraform.tfstate
 terraform.tfstate.backup
 .terraform/modules
+.terraform.lock.hcl
