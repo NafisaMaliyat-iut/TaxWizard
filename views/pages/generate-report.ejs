@@ -13,6 +13,7 @@
 <body>
   <% const inputFieldClass="rounded-lg block w-full p-4 text-lg bg-white text-[#03045e]" %>
   <% const primaryButtonClass="relative py-1.5 font-medium text-2xl rounded-xl ease-in lg:px-8 md:px-6 px-6 text-white bg-blue-400 hover:bg-gradient-to-r hover:from-[#03045e] hover:to-blue-700 hover:duration-100 hover:ease-in hover:scale-105" %>
+  <% const highlightedButtonClass="relative py-1.5 font-medium text-2xl rounded-xl ease-in lg:px-6 md:px-4 px-4 text-white bg-gradient-to-r from-[#03045e] to-blue-700 hover:duration-100 hover:ease-in hover:scale-105" %>
   <% labelClass ="flex flex-start items-start uppercase text-[#03045e] text-xs font-bold mb-2" %>
 
 
@@ -39,6 +40,11 @@
                 <option value="<%= year %>"><%= year %></option>
                 <% } %>
               </select>
+              <div class="flex mt-4 items-center">
+                <button type="button" onclick="" class="<%= primaryButtonClass %>">
+                  Generate
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -46,8 +52,9 @@
           <div class="p-4 border-b flex items-center justify-between">
             <h2 class="text-2xl text-[#03045e] font-bold">Tax Report</h2>
             <div class="flex items-center">
-              <button type="button" onclick="" class="<%= primaryButtonClass %>">
-                Download Detailed Report
+              <button type="button" onclick="" class="<%= highlightedButtonClass %>">
+                <i class="fa-solid fa-download mr-2"></i>
+                Download Report
               </button>
             </div>
           </div>
@@ -99,6 +106,8 @@
                   <span id="total-taxable"></span>
                 </span>
               </span>
+              <div class="font-bold">All our tax calculations are done according to the Bangladesh Tax Act of 2023.
+              </div>
             </div>
             <div id="no-data" class="hidden">
               <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
