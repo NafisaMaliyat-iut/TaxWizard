@@ -24,7 +24,9 @@
       }
 
       /* Hide elements that should not be printed */
-      header, footer, .no-print {
+      header,
+      footer,
+      .no-print {
         display: none;
       }
 
@@ -44,7 +46,7 @@
 
 
   <%- include('../partials/user-sidebar.ejs') %>
-  <div class="p-4 sm:py-24">
+  <div class="px-4 pb-8 pt-24 backdrop-blur-lg bg-white/30 min-h-screen" style="background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4)), url('https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&q=80&w=1474&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
     <div class="p-4 rounded-lg ">
       <div class="grid grid-cols-1 gap-4 mb-4">
         <% if (typeof user !== 'undefined' && user) { %>
@@ -76,14 +78,6 @@
             </form>
           </div>
         </div>
-
-
-
-
-
-
-
-
         <div id="print-section">
           <section id="data" class="bg-white hidden mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
             <div class="p-4 border-b flex items-center justify-between">
@@ -130,7 +124,7 @@
                 <div class="font-bold">All our tax calculations are done according to the Bangladesh Tax Act of 2023.
                 </div>
               </div>
-  
+
           </section>
           <section id="no-data" class="bg-white hidden mx-auto w-full rounded-xl shadow-xl border border-[#00b4d8]">
             <div>
