@@ -105,12 +105,9 @@ const postCalculateTax = async (req, res) => {
     const age = user.age; // Assuming user.age is the user's age
 
     // Calculate the tax
-    const taxAmount = calculatetax(
-      yearly_amount,
-      gender,
-      age
-    );
-
+    const taxAmount = calculatetax(yearly_amount, gender, age);
+    
+    
     //save them to the taxDB database
     const tax = new taxDB({
       nid: user.nid,
@@ -119,16 +116,18 @@ const postCalculateTax = async (req, res) => {
       taxable_amount: taxAmount,
     });
 
-    if (year === user.year) {
+    if(year === user.year){
       //remove data from database using userid
       await taxDB.deleteMany({ nid: user.nid });
       await tax.save();
     }
-
+    
     console.log(taxAmount);
     //render to home page
     return res.status(200).render("pages/home");
-  } catch (error) {
+
+  } 
+  catch (error) {
     console.log(error);
     return res
       .status(500)
