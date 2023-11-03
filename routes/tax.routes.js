@@ -3,7 +3,7 @@ const route = require("express").Router();
 const passport = require("passport");
 const { getprofile } = require("../controllers/profile.controllers.js");
 const {
-  getHomePage, getCalculateTaxPage, postCalculateTax, getGenerateReportPage, getGenerateReportInfo, postGenerateReportPage
+  getHomePage, getCalculateTaxPage, postCalculateTax, getGenerateReportPage, postGenerateReportPage, 
 } = require("../controllers/tax.controllers.js");
 
 
