@@ -15,7 +15,7 @@
     <div class="flex md:order-2">
       <div class="flex flex-col justify-end">
         <div class="z-10">
-          <button type="button" onclick="localStorage.clear()" class="<%= primaryButtonClass %>">
+          <button type="button" onclick="logoutAndRedirect()" class="<%= primaryButtonClass %>">
             Log out
           </button>
         </div>
@@ -37,10 +37,11 @@
   </div>
 </nav>
 <script>
-  function toggleMobileNavMenu() {
-    const menu = document.querySelector(
-      "#navbar-sticky"
-    );
-    menu.classList.toggle("hidden");
+  function logoutAndRedirect() {
+    // Clear local storage or perform any other logout actions as needed.
+    localStorage.clear();
+    
+    // Redirect to the "/home" page.
+    window.location.href = "/home";
   }
 </script>
