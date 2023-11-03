@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TaxWizard</title>
+  <link rel="icon" href="/assets/logo.png" type="image/png">
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
+
 <body>
-  <%- include('../partials/navbar.ejs') %>
-  
+  <% const primaryButtonClass="relative py-2 font-medium text-2xl rounded-xl ease-in lg:px-10 md:px-6 px-6 text-white bg-blue-400 hover:bg-gradient-to-r hover:from-[#03045e] hover:to-blue-700 hover:duration-100 hover:ease-in hover:scale-105" %>
+
+
+  <%- include('../partials/public-navbar.ejs') %>
+  <section id="home" class="w-full py-24 flex items-center min-h-screen justify-center relative">
+
+    <video class="absolute top-0 w-full h-full object-cover opacity-20" autoplay muted loop poster="/assets/welcome-page-bg.jpg">
+      <source src="/assets/welcome-page-bg.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="mx-auto max-w-[43rem] z-10">
+      <div class="text-center">
+        <p class="text-lg font-medium leading-8 text-[#03045e]">Introducing TaxWizard: Your Tax Solution</p>
+        <h1 class="mt-3 text-[3.5rem] font-bold leading-[4rem] tracking-tight text-[#03045e]">Simplify And Track Your Tax</h1>
+        <p class="mt-3 text-lg leading-relaxed text-black">Manage your tax-related tasks effortlessly with TaxWizard, the all-in-one solution for individuals and businesses. Say goodbye to the complexity of tax filing and enjoy a streamlined experience.</p>
+      </div>
+
+      <div class="mt-6 flex items-center justify-center gap-4">
+        <a href="/login" class="<%= primaryButtonClass %>">Get started</a>
+      </div>
+    </div>
+  </section>
+
 </body>
+
 </html>

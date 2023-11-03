@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    fullname: {
+    full_name: {
         type: String,
         required: true
     },
@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
     
     city_corporation: {
         type: String,
-        required: true
+        required: true,        
+        enum: ['dhaka', 'chattogram', 'othercity', 'noncity']
     }
 });
 
