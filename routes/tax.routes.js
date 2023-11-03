@@ -11,4 +11,5 @@ route.post("/calculateTax",passport.authenticate('jwt',{session:false}), postCal
 route.get("/home", getHomePage);
 route.get("/profile-information",passport.authenticate('jwt',{session:false}),getprofile);
 route.get("/calculate", getCalculateTaxPage);
+route.post("/calculateTax", postCalculateTax);
 module.exports = route;

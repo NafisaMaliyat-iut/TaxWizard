@@ -1,4 +1,5 @@
 const user = require("../models/user.model.js");
+const taxDB = require("../models/tax.model.js");
 const path = require("path");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -97,9 +98,17 @@ const postCalculateTax = async (req, res) => {
 
     // Calculate the tax
     const taxAmount = calculatetax(yearly_amount, gender, age);
-    console.log(taxAmount);
 
-    res.render("taxPage", { taxAmount });
+    //save them to the taxDB database
+    const tax = new taxDB({
+      nid: user.nid,
+      year: year,
+      yearly_amount: yearly_amount,
+      taxable_amount: taxAmount,
+    });
+
+    await tax.save();
+
     return res.status(200).json({ taxAmount });
 
   } 
