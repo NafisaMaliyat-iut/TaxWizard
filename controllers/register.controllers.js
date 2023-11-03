@@ -9,14 +9,11 @@ const registerUser = async (req, res) => {
     try {
         const {nid,email,password,full_name, age,city_corporation} = req.body;
         console.log(nid,email,password,full_name, age,city_corporation);
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        // const newUser = new user({
-        //     username: req.body.username,
-        //     email: req.body.email,
-        //     password: hashedPassword,
-        //     role: req.body.role
-        // });
-        // await user.save();
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const newUser = new user({
+            nid,email,password:hashedPassword,full_name, age,city_corporation
+        });
+        await user.save();
         res.status(201).json({ message: "User created successfully" });
     } catch (err) {
         res.status(400).json({ message: err.message });
