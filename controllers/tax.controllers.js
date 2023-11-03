@@ -16,12 +16,13 @@ const getHomePage = async (req, res) => {
 
 const getCalculateTaxPage = async (req, res) => {
   try {
-    return res.status(200).render("pages/calculate-tax");
+    return res
+      .status(200)
+      .render("pages/calculate-tax");
   } catch (error) {
     return res.status(404).render("error404");
   }
-}
-
+};
 
 const postCalculateTax = async (req, res) => {
   try {
@@ -32,17 +33,19 @@ const postCalculateTax = async (req, res) => {
     const user = await User.findById(userid);
     console.log(user);
 
-    
-    
     // return res.status(200).json({message:"testing"});
     if (!user) {
-      return res.status(404).json({ error: "User not found" })
+      return res
+        .status(404)
+        .json({ error: "User not found" });
     }
 
     // Define the tax calculation function
     function calculatetax(income, gender, age) {
       const taxFreeIncome =
-        gender === "female" || age > 65 ? 400000 : 350000;
+        gender === "female" || age > 65
+          ? 400000
+          : 350000;
 
       let taxableIncome = income - taxFreeIncome;
       if (taxableIncome <= 0) {
@@ -84,9 +87,12 @@ const postCalculateTax = async (req, res) => {
 
       // Check if the user is eligible for the minimum tax
       const minimumTax =
-        user.location === "Dhaka" || user.location === "Chattogram"
+        user.location === "Dhaka" ||
+        user.location === "Chattogram"
           ? 5000
-          : user.location === "otherCity" ? 4000 : 3000;
+          : user.location === "otherCity"
+          ? 4000
+          : 3000;
 
       // Apply minimum tax if applicable
       totalTax = Math.max(minimumTax, totalTax);
@@ -101,16 +107,6 @@ const postCalculateTax = async (req, res) => {
     // Calculate the tax
     const taxAmount = calculatetax(yearly_amount, gender, age);
     
-    if(year === user.year){
-      //remove data from database using userid
-      user.taxable_amount = taxAmount;
-      await tax.save();
-    
-      console.log(taxAmount);
-      //render to home page
-      return res.status(200).render("pages/home");
-
-    }
     
     //save them to the taxDB database
     const tax = new taxDB({
@@ -120,26 +116,47 @@ const postCalculateTax = async (req, res) => {
       taxable_amount: taxAmount,
     });
 
-    console.log(taxAmount);
-      //render to home page
-      return res.status(200).render("pages/home");
+    if(year === user.year){
+      //remove data from database using userid
+      await taxDB.deleteMany({ nid: user.nid });
+      await tax.save();
+    }
     
+    console.log(taxAmount);
+    //render to home page
+    return res.status(200).render("pages/home");
+
   } 
   catch (error) {
     console.log(error);
-    return res.status(500).json({ error: error.message });
+    return res
+      .status(500)
+      .json({ error: error.message });
   }
 };
 
-const getGenerateReportPage = async (req, res) => {
+const getGenerateReportPage = async (
+  req,
+  res
+) => {
   try {
-    const userid = req.user.id;
-    return res.status(200).render("pages/generate-report");
+    return res
+      .status(200)
+      .render("pages/generate-report");
   } catch (error) {
     return res.status(404).render("error404");
   }
 };
 
+const getGenerateReportInfo = async (
+  req,
+  res
+) => {};
+
 module.exports = {
-  getHomePage, getCalculateTaxPage, postCalculateTax,getGenerateReportPage
+  getHomePage,
+  getCalculateTaxPage,
+  postCalculateTax,
+  getGenerateReportPage,
+  getGenerateReportInfo,
 };
