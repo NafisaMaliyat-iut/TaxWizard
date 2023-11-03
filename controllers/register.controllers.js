@@ -1,9 +1,6 @@
 const User = require('../models/user.model.js');
-const path = require('path');
 const bcrypt = require('bcrypt');
-const passport = require('passport');
 
-//register user
 const registerUser = async (req, res) => {
     try {
         const {nid,password,full_name, age,city_corporation,gender} = req.body;
@@ -19,7 +16,6 @@ const registerUser = async (req, res) => {
         await newUser.save();
         return res.status(200).json({ message: "User created successfully" });
     } catch (err) {
-        console.log(err);
         res.status(400).render('pages/register', { err_message: err.message });
     }
 }
