@@ -523,6 +523,21 @@ video {
 .mr-3 {
   margin-right: 0.75rem;
 }
+.-mt-3 {
+  margin-top: -0.75rem;
+}
+.mb-0 {
+  margin-bottom: 0px;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.mr-0 {
+  margin-right: 0px;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .block {
   display: block;
 }
@@ -556,6 +571,9 @@ video {
 }
 .flex-wrap {
   flex-wrap: wrap;
+}
+.items-start {
+  align-items: flex-start;
 }
 .items-center {
   align-items: center;
@@ -673,11 +691,31 @@ video {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
 .pb-2 {
   padding-bottom: 0.5rem;
 }
 .pt-4 {
   padding-top: 1rem;
+}
+.pb-0 {
+  padding-bottom: 0px;
+}
+.pl-2 {
+  padding-left: 0.5rem;
+}
+.pr-2 {
+  padding-right: 0.5rem;
+}
+.pt-0 {
+  padding-top: 0px;
 }
 .text-left {
   text-align: left;
@@ -705,6 +743,10 @@ video {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
 .font-bold {
   font-weight: 700;
 }
@@ -713,6 +755,9 @@ video {
 }
 .font-semibold {
   font-weight: 600;
+}
+.uppercase {
+  text-transform: uppercase;
 }
 .tracking-wide {
   letter-spacing: 0.025em;
@@ -736,6 +781,18 @@ video {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+.text-\[\#caf0f8\] {
+  --tw-text-opacity: 1;
+  color: rgb(202 240 248 / var(--tw-text-opacity));
+}
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 .opacity-60 {
   opacity: 0.6;
@@ -880,6 +937,16 @@ video {
   content: var(--tw-content);
   --tw-scale-x: 1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus\:ring-\[\#caf0f8\]:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(202 240 248 / var(--tw-ring-opacity));
 }
 
 @media (min-width: 640px) {
