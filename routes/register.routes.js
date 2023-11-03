@@ -1,10 +1,6 @@
 const route=require('express').Router();
 
-const {getRegister,
-    registerUser
-    } = require('../controllers/user.controller');
-
-route.get('/register',getRegister);
-
+const {registerUser,
+    } = require('../controllers/register.controllers.js');
 
 module.exports=route;
