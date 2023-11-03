@@ -16,7 +16,7 @@ const getHomePage = async (req, res) => {
 
 const getCalculateTaxPage = async (req, res) => {
   try {
-    return res
+      return res
       .status(200)
       .render("pages/calculate-tax");
   } catch (error) {
@@ -33,7 +33,6 @@ const postCalculateTax = async (req, res) => {
     const user = await User.findById(userid);
     console.log(user);
 
-    // return res.status(200).json({message:"testing"});
     if (!user) {
       return res
         .status(404)
@@ -106,26 +105,44 @@ const postCalculateTax = async (req, res) => {
 
     // Calculate the tax
     const taxAmount = calculatetax(yearly_amount, gender, age);
-    
-    
-    //save them to the taxDB database
-    const tax = new taxDB({
-      nid: user.nid,
-      year: year,
-      yearly_amount: yearly_amount,
-      taxable_amount: taxAmount,
-    });
+    const taxPayer=await taxDB.findOne({nid:user.nid,year:year});
+    console.log(taxPayer);
 
-    if(year === user.year){
-      //remove data from database using userid
-      await taxDB.deleteMany({ nid: user.nid });
+    if(taxPayer){
+      //update the taxpayer objects yearly_amount and taxable_amount
+      taxPayer.yearly_amount=yearly_amount;
+      taxPayer.taxable_amount=taxAmount;
+      await taxPayer.save();
+    }
+    else{
+      const tax = await taxDB.create({
+        nid: user.nid,
+        year: year,
+        yearly_amount: yearly_amount,
+        taxable_amount: taxAmount,
+      });
       await tax.save();
     }
-    
-    console.log(taxAmount);
-    //render to home page
-    return res.status(200).render("pages/home");
 
+    // if(taxPayer.year === year){
+    //   //Update database instance if year is same
+    //   const tax = await taxDB.findOneAndUpdate(
+    //     { nid: user.nid, year: year },
+    //     { yearly_amount: yearly_amount, taxable_amount: taxAmount },
+    //     { new: true }
+    //   );
+    // }
+    // else if(user.yaer !== year){
+    //   //Create new database instance if year is different
+    //   const tax = await taxDB.create({
+    //     nid: user.nid,
+    //     year: year,
+    //     yearly_amount: yearly_amount,
+    //     taxable_amount: taxAmount,
+    //   });
+    //   await tax.save();
+    // } 
+    return res.status(200).json({message:"Tax calculated successfully"});
   } 
   catch (error) {
     console.log(error);
