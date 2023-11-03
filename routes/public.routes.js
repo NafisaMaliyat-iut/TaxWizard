@@ -1,7 +1,6 @@
 const route=require('express').Router();
 
-const {welcome,
-    getRegister
+const {welcome
     } = require('../controllers/public.controllers');
 
 route.get('/',welcome);
