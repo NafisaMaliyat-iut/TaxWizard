@@ -60,5 +60,20 @@ describe('POST /registerUser', () => {
             .post('/registerUser')
             .send(newUser)
             .expect(400);
-    }); 
+    });
+    test('password should be at least 8 characters', async () => {
+        const newUser = {
+            nid: '1234567890123',
+            password: 'pass',
+            full_name: 'John Doe',
+            age: 30,
+            gender: 'male',
+            city_corporation: 'sylhet'
+        };
+        await request(app)
+            .post('/registerUser')
+            .send(newUser)
+            .expect(400);
+    });
+
 });
