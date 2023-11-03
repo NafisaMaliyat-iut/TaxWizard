@@ -9,30 +9,29 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script>
-    // console.log(localStorage.getItem('token'));
-    // fetch('/profile-information', {
-    //     method: 'GET',
-    //     headers: {
-    //       'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the JWT token here
-    //     },
-    //   })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error(`Request failed with status: ${response.status}`);
-    //     }
-    //     return response.json(); // Parse the response body as JSON
-    //   })
-    //   .then((data) => {
-    //     document.getElementById('nid').innerText = data.nid;
-    //     document.getElementById('full_name').innerText = data.full_name;
-    //     document.getElementById('age').innerText = data.age;
-    //     document.getElementById('gender').innerText = data.gender;
-    //     document.getElementById('city_corporation').innerText = data.city_corporation;
-    //   })
-    //   .catch((error) => {
-    //     console.error('Profile request failed:', error);
-    //     window.location.href = "/";
-    //   });
+    fetch('/profile-information', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the JWT token here
+        },
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+        return response.json(); // Parse the response body as JSON
+      })
+      .then((data) => {
+        document.getElementById('nid').innerText = data.nid;
+        document.getElementById('full_name').innerText = data.full_name;
+        document.getElementById('age').innerText = data.age;
+        document.getElementById('gender').innerText = data.gender;
+        document.getElementById('city_corporation').innerText = data.city_corporation;
+      })
+      .catch((error) => {
+        console.error('Profile request failed:', error);
+        window.location.href = "/";
+      });
   </script>
 </head>
 
