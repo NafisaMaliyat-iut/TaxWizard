@@ -11,4 +11,10 @@ require("./config/passport");
 app.use(passport.initialize());
 
 app.use(express.static('public'));
+
+const public_routes = require("./routes/public.routes");
+const register_routes = require("./routes/register.routes");
+app.use(public_routes)
+app.use(register_routes)
+
 module.exports = app;
