@@ -9,7 +9,7 @@
 </button>
 
 <aside id="sidebar-multi-level-sidebar" class="fixed top-10 sm:top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-  <div class="h-full px-3 py-4 overflow-y-auto bg-[#caf0f8]">    
+  <div class="h-full px-3 py-4 overflow-y-auto bg-[#caf0f8]">
     <ul class="space-y-2 font-medium text-xl border-b border-[#03045e] pb-2">
       <li>
         <a href="/home" class="<%= navLinkClass %>">
@@ -38,7 +38,7 @@
     </ul>
     <ul class="space-y-2 font-medium text-xl">
       <li>
-        <div class="<%= navLinkClass %> my-3">
+        <div class="<%= navLinkClass %> my-3" onclick="localStorage.clear()">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
           <span class="ml-3">Logout</span>
         </div>

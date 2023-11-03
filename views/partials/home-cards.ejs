@@ -1,0 +1,12 @@
+<a href="<%= cardLink %>" class="w-full bg-white rounded-lg grid grid-cols-1 justify-center items-center hover:scale-110 cursor-pointer">
+  <div class="grid gap-4 col-span-1">
+    <div class="relative w-full  min-h-[8em] h-full bg-cover bg-center group rounded-lg border-2 hover:border-[#0077b7] overflow-hidden shadow-lg transition duration-300 ease-in-out" style="background-image: url('<%= cardImageUrl %>')">
+      <div class="bg-black/40 absolute inset-0 transition duration-300 ease-in-out"></div>
+      <div class="relative w-full h-full p-4 sm:px-6 lg:px-4 flex">
+        <div class="h-full my-auto">
+          <h1 class="text-white text-3xl mt-2 font-bold"><%= cardTitle %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
