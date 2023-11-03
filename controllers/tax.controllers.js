@@ -141,7 +141,6 @@ const getGenerateReportPage = async (
   res
 ) => {
   try {
-    const userid = req.user.id;
     return res
       .status(200)
       .render("pages/generate-report");
