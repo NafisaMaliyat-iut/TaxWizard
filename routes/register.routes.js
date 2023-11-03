@@ -1,6 +1,9 @@
-const route=require('express').Router();
+const route = require("express").Router();
 
-const {registerUser,
-    } = require('../controllers/register.controllers.js');
+const {
+  registerUser,
+  getRegister,
+} = require("../controllers/register.controllers.js");
 
-module.exports=route;
+route.get("/register", getRegister);
+module.exports = route;
