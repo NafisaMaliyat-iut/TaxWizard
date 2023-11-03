@@ -7,7 +7,7 @@ const passport = require('passport');
 const registerUser = async (req, res) => {
     try {
         const {nid,password,full_name, age,city_corporation,gender} = req.body;
-        console.log(nid,password,full_name, age,city_corporation,gender);
+        // console.log(nid,password,full_name, age,city_corporation,gender);
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = new User({
             nid,
