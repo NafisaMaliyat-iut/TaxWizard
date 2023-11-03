@@ -10,67 +10,86 @@
 
 <body>
   <% const inputFieldClass="rounded-lg block w-full p-4 text-lg bg-white text-[#03045e]" %>
-    <% const
+  <% const
       primaryButtonClass="relative py-2 font-medium text-2xl rounded-xl ease-in lg:px-10 md:px-6 px-6 text-white bg-blue-400 hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600 hover:duration-100 hover:ease-in hover:scale-105"
       %>
+  <% labelClass ="flex flex-start items-start uppercase text-[#03045e] text-xs font-bold mb-2" %>
 
-
-      <section class="min-h-screen flex items-stretch text-black">
-        <div class="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center overflow-hidden"
-          style="background-image: url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80);">
-          <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
-          <div class="w-full px-24 z-10">
-            <h1 class="text-5xl font-bold text-left tracking-wide">Keep it special</h1>
-            <p class="text-3xl my-4">Capture your personal memory in unique way, anywhere.</p>
+  <section class="min-h-screen flex items-stretch text-black">
+    <div class="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center overflow-hidden" style="background-image: url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80);">
+      <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+      <div class="w-full px-24 z-10">
+        <h1 class="text-5xl font-bold text-left tracking-wide">Keep it special</h1>
+        <p class="text-3xl my-4">Capture your personal memory in unique way, anywhere.</p>
+      </div>
+    </div>
+    <div class="overflow-y-auto lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0 bg-[#caf0f8]">
+      <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style="background-image: url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80);">
+        <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+      </div>
+      <div class="w-full py-6 z-20">
+        <form action="/registerUser" method="post" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+          <div class="pb-2 pt-4">
+            <label class="<%= labelClass %>" for="nid">
+              NID
+            </label>
+            <input type="number" name="nid" id="nid" placeholder="NID" minlength="14" maxlength="14" class="<%= inputFieldClass %>" required>
           </div>
-        </div>
-        <div
-          class="overflow-y-auto lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0 bg-[#caf0f8]">
-          <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center"
-            style="background-image: url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80);">
-            <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+          <div class="pb-2 pt-4">  
+            <label class="<%= labelClass %>" for="email">
+              Email
+            </label>
+            <input type="email" name="email" id="email" placeholder="Email" class="<%= inputFieldClass %>" required>
           </div>
-          <div class="w-full py-6 z-20">
-            <form action="/registerUser" method="post" class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
-              <div class="pb-2 pt-4">
-                <input type="number" name="nid" id="nid" placeholder="NID" minlength="14" maxlength="14"
-                  class="<%= inputFieldClass %>" required>
-              </div>
-              <div class="pb-2 pt-4">
-                <input type="email" name="email" id="email" placeholder="Email" class="<%= inputFieldClass %>" required>
-              </div>
-              <div class="pb-2 pt-4">
-                <input class="<%= inputFieldClass %>" type="password" name="password" id="password"
-                  placeholder="Password" required>
-              </div>
-              <div class="pb-2 pt-4">
-                <input class="<%= inputFieldClass %>" type="text" name="full_name" id="full_name"
-                  placeholder="Full Name" required>
-              </div>
-              <div class="pb-2 pt-4">
-                <input class="<%= inputFieldClass %>" type="number" name="age" id="age" min="18" placeholder="Age"
-                  required>
-              </div>
-              <div class="pb-2 pt-4">
-                <select id="city_corporation" name="city_corporation" class="<%= inputFieldClass %>" required>
-                  <option selected disabled>Select Your City Corporation</option>
-                  <option value="dhaka">Dhaka</option>
-                  <option value="chattogram">Chattogram</option>
-                  <option value="othercity">Other City Corporation</option>
-                  <option value="noncity">Non City Corporation</option>
-                </select>
-              </div>
-              <div class="px-4 pb-2 pt-4">
-                <div class="z-10">
-                  <button type="submit" class="<%= primaryButtonClass %>">
-                    Register
-                  </button>
-                </div>
-              </div>
-            </form>
+          <div class="pb-2 pt-4">    
+            <label class="<%= labelClass %>" for="password">
+              Password
+            </label>
+            <input class="<%= inputFieldClass %>" type="password" name="password" id="password" placeholder="Password" required>
           </div>
-        </div>
-      </section>
+          <div class="pb-2 pt-4">         
+            <label class="<%= labelClass %>" for="full_name">
+              Full Name
+            </label>
+            <input class="<%= inputFieldClass %>" type="text" name="full_name" id="full_name" placeholder="Full Name" required>
+          </div>
+          <div class="pb-2 pt-4">            
+            <label class="<%= labelClass %>" for="age">
+              Age
+            </label>
+            <input class="<%= inputFieldClass %>" type="number" name="age" id="age" min="18" placeholder="Age" required>
+          </div>
+          <div class="pb-2 pt-4">
+            <label class="<%= labelClass %>" for="gender">
+              Gender
+            </label>
+            <select id="gender" name="gender" class="<%= inputFieldClass %>" required>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="pb-2 pt-4">
+            <label class="<%= labelClass %>" for="city_corporation">
+              City Corporation
+            </label>
+            <select id="city_corporation" name="city_corporation" class="<%= inputFieldClass %>" required>
+              <option value="dhaka">Dhaka</option>
+              <option value="chattogram">Chattogram</option>
+              <option value="othercity">Other City Corporation</option>
+              <option value="noncity">Non City Corporation</option>
+            </select>
+          </div>
+          <div class="px-4 pb-2 pt-4">
+            <div class="z-10">
+              <button type="submit" class="<%= primaryButtonClass %>">
+                Register
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
 </body>
 
 </html>
