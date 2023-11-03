@@ -18,8 +18,7 @@ const loginUser=async(req,res)=>{
         const {nid,password} = req.body;
         const userdummy={nid,password};
         const token=await user.login(userdummy);
-        res.status(200).json({success:true,token:token,redirectTo:'/home'})
-        // return res.status(200).json({message:"User logged in successfully"})
+        res.status(200).json({success:true,token:token,redirectTo:'/home'});
     }
     catch(error){
         // return res.status(404).render('error404');
