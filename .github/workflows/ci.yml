@@ -28,9 +28,9 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
 
-    - name: Set up mongo environment variables
+    - name: Set up mongo url secret
 
-      run: echo "_MONGO_URI=${{ vars._MONGO_URI }}" >> $GITHUB_ENV
+      run: echo "_MONGO_URI=${{ secrets._MONGO_URI }}" >> $GITHUB_ENV
 
     - name: Set up node environment variables
       run: echo "_NODE_ENV=${{ vars._NODE_ENV }}" >> $GITHUB_ENV
