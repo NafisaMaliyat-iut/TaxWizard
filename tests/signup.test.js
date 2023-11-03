@@ -61,5 +61,4 @@ describe('POST /registerUser', () => {
             .send(newUser)
             .expect(400);
     }); 
-
 });
