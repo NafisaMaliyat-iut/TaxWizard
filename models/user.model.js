@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
     
     city_corporation: {
         type: String,
-        required: true
+        required: true,        
+        enum: ['dhaka', 'chattogram', 'othercity', 'noncity']
     }
 });
 
