@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../app');
 
 describe('POST /login', () => {
-    it('should return a 200 status code and a success message when valid email and password are provided', async () => {
+    test('should return a 200 status code and a success message when valid email and password are provided', async () => {
         const res = await request(app)
             .post('/login')
             .send({
@@ -13,7 +13,7 @@ describe('POST /login', () => {
         expect(res.body.message).toEqual('Login successful');
     });
 
-    it('should return a 401 status code and an error message when invalid email is provided', async () => {
+    test('should return a 401 status code and an error message when invalid email is provided', async () => {
         const res = await request(app)
             .post('/login')
             .send({
@@ -24,7 +24,7 @@ describe('POST /login', () => {
         expect(res.body.message).toEqual('Invalid email or password');
     });
 
-    it('should return a 401 status code and an error message when invalid password is provided', async () => {
+    test('should return a 401 status code and an error message when invalid password is provided', async () => {
         const res = await request(app)
             .post('/login')
             .send({
