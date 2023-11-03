@@ -53,7 +53,7 @@ on:
 env:
   PROJECT_ID: tax-worker
   GAR_LOCATION: us-west1
-  SERVICE: taxwizard-00001-qx5 
+  SERVICE: tax-worker-00001-t2l 
   REGION: us-west1
 
 jobs:
