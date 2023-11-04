@@ -31,18 +31,21 @@
         <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
       </div>
       <div class="w-full py-6 z-20">
-        <form action="/registerUser" method="post" class="w-full px-6 lg:px-12 mx-auto">
+        <form id="register-form" action="/registerUser" method="POST" class="w-full px-6 lg:px-12 mx-auto">
+          <div id="error-box" style="color:red;display: none;">
+            <p id="error-message"></p>
+          </div>
           <div class="pb-2 pt-4">
             <label class="<%= labelClass %>" for="nid">
               NID
             </label>
-            <input type="number" name="nid" id="nid" placeholder="NID" minlength="14" maxlength="14" class="<%= inputFieldClass %>" required>
+            <input type="text" name="nid" id="nid" placeholder="NID" minlength="14" maxlength="14" class="<%= inputFieldClass %>" required>
           </div>
           <div class="pb-2 pt-4">
             <label class="<%= labelClass %>" for="password">
               Password
             </label>
-            <input class="<%= inputFieldClass %>" type="password" name="password" id="password" placeholder="Password" required>
+            <input class="<%= inputFieldClass %>" type="password" name="password" id="password" placeholder="Password" minlength="8" required>
           </div>
           <div class="pb-2 pt-4">
             <label class="<%= labelClass %>" for="full_name">
@@ -80,14 +83,14 @@
           <div class="text-left text-[#0077b7] cursor-pointer my-1 ">
             Already A User?<a href="/login" class="hover:text-[#03045e] hover:underline">&nbsp;Login Here</a>
           </div>
-          <% if (typeof err_message !== 'undefined' && err_message) { %>
+          <% if (typeof message !== 'undefined' && message) { %>
           <div class="my-2">
-            <%- include('../partials/form-message.ejs', { message: err_message, color: 'red' }) %>
+            <%- include('../partials/form-message.ejs', { message: message, color: 'red' }) %>
           </div>
           <% } %>
           <div class="px-4 pb-2 pt-4">
             <div class="z-10">
-              <button type="submit" class="<%= primaryButtonClass %>">
+              <button type="submit" class="<%= primaryButtonClass %>" id="register-button">
                 Register
               </button>
             </div>
@@ -98,5 +101,43 @@
     </div>
   </section>
 </body>
+<script>
 
+  document.addEventListener('DOMContentLoaded', () => {
+      const registrationForm = document.getElementById('register-form');
+  
+      registrationForm.addEventListener('submit', async (event) => {
+          document.getElementById("register-button").disabled = true;
+          event.preventDefault();
+          
+          const formData = new FormData(registrationForm);
+  
+          try {
+              const response = await fetch('/registerUser', {
+                  method: 'POST',
+                  body: JSON.stringify(Object.fromEntries(formData)),
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+              });
+  
+              const data = await response.json();
+              console.log(data);
+              if (data.success) {
+                  window.location.href = data.redirectTo;
+              } else {
+                  console.log('Registration failed:', data.error);
+                  document.getElementById("error-box").style.display = "block";
+                  document.getElementById("error-message").innerText = "Registration Unsuccesful";
+              }
+          } catch (error) {
+              console.error('Registration failed:', error.message);
+              document.getElementById("error-box").style.display = "block";
+              document.getElementById("error-message").innerText = "Registration Unsuccesful, please follow the restrctions provided";
+          }finally{
+            document.getElementById("register-button").disabled = false;
+          }
+      });
+  });
+  </script>
 </html>
