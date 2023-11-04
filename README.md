@@ -58,7 +58,7 @@ TaxWizard is a software tool designed to simplify income tax calculations in Ban
 
 - Visit the TaxWizard website at: https://tax-worker-2npiqzi4ka-uw.a.run.app/
 
-  ## Contributors
+ ## Contributors
 
 - [Nafisa Maliyat](https://github.com/NafisaMaliyat-iut)
 
