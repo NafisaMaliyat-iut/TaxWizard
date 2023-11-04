@@ -14,6 +14,14 @@ const getHomePage = async (req, res) => {
   }
 };
 
+const getChartPage = async (req, res) => {
+  try {
+    return res.status(200).render("pages/view-chart");
+  } catch (error) {
+    return res.status(404).render("error404");
+  }
+};
+
 const getCalculateTaxPage = async (req, res) => {
   try {
     return res
@@ -192,4 +200,5 @@ module.exports = {
   postCalculateTax,
   getGenerateReportPage,
   postGenerateReportPage,
+  getChartPage
 };
