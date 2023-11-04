@@ -11,6 +11,8 @@ TaxWizard is a software tool designed to simplify income tax calculations in Ban
 ## Technologies Used
 
 - We've developed TaxWizard using an Express.js app with EJS as the template engine, utilizing the following technologies:
+
+
   ![TailwindCSS](	https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)![ExpressJS](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ## Features
@@ -45,16 +47,27 @@ TaxWizard is a software tool designed to simplify income tax calculations in Ban
 - Workflow runs CI and on success, runs CD to ensure minimum bugs in production environment.
 - Includes backend testing to ensure application reliability.
 
-### Containerization & Infrastructure as Code (IaC)
+### IaC tools
+- Terraform is used to provision some of the required resources for the project.
+- It allows the system to be easily built with the configuration scripts in the future.
+- Terraform is used to assign IAM rules to the resources.
+- This ensures that the resources are secure and only authorized users can access them.
+- Terraform is used to automate the building of infrastructure, which saves time and reduces the risk of human error.
+- It allows the project to be easily scaled up or down as per the demand.
+- Terraform is used to manage the infrastructure as code, which makes it easy to track changes and maintain the infrastructure.
+
+### Containerization
 - Uses Docker for containerization of the application before deployment.
-- Leverages Terraform to automate the building of infrastructure.
+- It provides a consistent environment as well as porability and isolation between different possibly conflicting software components. 
+- It also improves scalability and both Containerization Technologies and IaC technologies allow better reproducability.
+- Lightweight and Cost Saving are some other advantages
 
 ### Deployment
 - Hosts the application on Google Cloud for scalability and availability.
 - Auto scalabity feature through Google Cloud Run upto 100 instances, allowing increased workloads without performance issues.
 
 ### Logging
-- Employs Datadog for comprehensive logging of the deployed website.
+- Employs Datadog for comprehensive logging of the deployed website, allows to observe the LMT and necessary log based information, which is essentially a form of monitoring to some extent.
 
 ## Getting Started
 
