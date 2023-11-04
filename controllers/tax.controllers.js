@@ -86,10 +86,10 @@ const postCalculateTax = async (req, res) => {
 
       // Check if the user is eligible for the minimum tax
       const minimumTax =
-        user.location === "Dhaka" ||
-        user.location === "Chattogram"
+        user.city_corporation === "dhaka" ||
+        user.city_corporation === "chattogram"
           ? 5000
-          : user.location === "otherCity"
+          : user.city_corporation === "othercity"
           ? 4000
           : 3000;
 
@@ -185,16 +185,11 @@ const postGenerateReportPage = async (
   }
 };
 
-const getGenerateReportInfo = async (
-  req,
-  res
-) => {};
 
 module.exports = {
   getHomePage,
   getCalculateTaxPage,
   postCalculateTax,
   getGenerateReportPage,
-  getGenerateReportInfo,
   postGenerateReportPage,
 };

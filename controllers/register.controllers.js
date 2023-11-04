@@ -1,10 +1,14 @@
 const User = require('../models/user.model.js');
 const bcrypt = require('bcrypt');
+const passwordValidator = require('password-validator');
 
 const registerUser = async (req, res) => {
     try {
         const {nid,password,full_name, age,city_corporation,gender} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
+        if(password.length<8){
+            throw new Error('Password should have minimum of 8 characters');
+        }
         const newUser = new User({
             nid,
             password: hashedPassword,

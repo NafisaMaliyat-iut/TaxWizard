@@ -41,4 +41,37 @@ describe('POST /loginUser', () => {
             .send(user)
             .expect(200);
     });
+    test('should not log in with wrong password', async () => {
+        const user = {
+            nid: '22222222222222',
+            password: 'password1234'
+        };
+        await request(app)
+            .post('/loginUser')
+            .send(user)
+            .expect(404);
+    });
+    //jwt token generation test
+    test('should generate jwt token', async () => {
+        const user = {
+            nid: '1234567890123',
+            password: 'password123'
+        };
+         const newUser = {
+                nid: '1234567890123',
+                password: 'password123',
+                full_name: 'John Doe',
+                age: 30,
+                gender: 'male',
+                city_corporation: 'dhaka'
+            };
+            await request(app)
+                .post('/registerUser')
+                .send(newUser)
+        const response = await request(app)
+            .post('/loginUser')
+            .send(user);
+        expect(response.body).toHaveProperty('token');
+        
+    });
 });
