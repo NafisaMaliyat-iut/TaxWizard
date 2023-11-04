@@ -8,6 +8,11 @@
   <link rel="icon" href="/assets/logo.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <script>
+    if(!localStorage.getItem('token')){
+      window.location.href="/"
+    }
+  </script>
 </head>
 
 <body>
