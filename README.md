@@ -38,20 +38,24 @@ TaxWizard is a software tool designed to simplify income tax calculations in Ban
 ### Version Control
 - Utilizes a version control system in Git with two branches: development and production (main).
 - Development branch is used to push all codes in development
-- Production branch is used to run the Github Workflow  
+- Production branch is used to run the Github Workflow
+
+### Containerization & Infrastructure as Code (IaC)
+- Uses Docker for containerization of the application before deployment.
+- Leverages Terraform to automate the building of infrastructure.
 
 ### CI/CD
 - Implements Continuous Integration/Continuous Deployment (CI/CD) through Github Actions for automated testing and deployment.
 - Workflow runs CI and on success, runs CD to ensure minimum bugs in production environment.
 - Includes backend testing to ensure application reliability.
 
-### Containerization & Infrastructure as Code (IaC)
-- Uses Docker for containerization of the application before deployment.
-- Leverages Terraform to automate the building of infrastructure.
-
 ### Deployment
 - Hosts the application on Google Cloud for scalability and availability.
 - Auto scalabity feature through Google Cloud Run upto 100 instances, allowing increased workloads without performance issues.
+
+### Basic Pipeline Diagram
+
+![Image Pipeline](https://route179.files.wordpress.com/2020/06/cicd-cloudrun.png)
 
 ### Logging
 - Employs Datadog for comprehensive logging of the deployed website.
