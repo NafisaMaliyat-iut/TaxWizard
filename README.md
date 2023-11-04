@@ -11,6 +11,8 @@ TaxWizard is a software tool designed to simplify income tax calculations in Ban
 ## Technologies Used
 
 - We've developed TaxWizard using an Express.js app with EJS as the template engine, utilizing the following technologies:
+
+
   ![TailwindCSS](	https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)![ExpressJS](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ## Features
