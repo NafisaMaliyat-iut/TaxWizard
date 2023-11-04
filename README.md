@@ -60,7 +60,7 @@ TaxWizard is a software tool designed to simplify income tax calculations in Ban
 ![Image Pipeline](https://route179.files.wordpress.com/2020/06/cicd-cloudrun.png)
 
 ### Logging
-- Employs Datadog for comprehensive logging of the deployed website.
+- Employs Datadog for comprehensive logging of the deployed website, allows to observe the LMT and necessary log based information, which is essentially a form of monitoring to some extent.
 
 ## Getting Started
 

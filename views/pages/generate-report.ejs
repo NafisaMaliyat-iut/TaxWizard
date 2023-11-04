@@ -36,6 +36,11 @@
       }
     }
   </style>
+  <script>
+    if(!localStorage.getItem('token')){
+      window.location.href="/"
+    }
+  </script>
 </head>
 
 <body>

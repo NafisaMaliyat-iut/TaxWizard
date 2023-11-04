@@ -12,4 +12,12 @@ const getChartData=async(req,res)=>{
     }
 }
 
-module.exports={getChartData};
+const getChartPage = async (req, res) => {
+    try {
+      return res.status(200).render("pages/view-chart");
+    } catch (error) {
+      return res.status(404).render("error404");
+    }
+  };
+
+module.exports={getChartData, getChartPage};

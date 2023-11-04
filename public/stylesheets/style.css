@@ -608,6 +608,43 @@ video {
 .h-full {
   height: 100%;
 }
+.max-h-fit {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+}
+.max-h-screen {
+  max-height: 100vh;
+}
+.max-h-\[20em\] {
+  max-height: 20em;
+}
+.max-h-\[50vh\] {
+  max-height: 50vh;
+}
+.max-h-\[70vh\] {
+  max-height: 70vh;
+}
+.max-h-\[60vh\] {
+  max-height: 60vh;
+}
+.max-h-\[60em\] {
+  max-height: 60em;
+}
+.max-h-full {
+  max-height: 100%;
+}
+.max-h-\[50em\] {
+  max-height: 50em;
+}
+.max-h-\[30em\] {
+  max-height: 30em;
+}
+.max-h-\[10em\] {
+  max-height: 10em;
+}
+.max-h-\[40em\] {
+  max-height: 40em;
+}
 .min-h-\[8em\] {
   min-height: 8em;
 }
@@ -636,6 +673,18 @@ video {
 .max-w-screen-xl {
   max-width: 1280px;
 }
+.max-w-screen-lg {
+  max-width: 1024px;
+}
+.max-w-screen-sm {
+  max-width: 640px;
+}
+.max-w-\[20em\] {
+  max-width: 20em;
+}
+.max-w-full {
+  max-width: 100%;
+}
 .flex-grow {
   flex-grow: 1;
 }
@@ -647,6 +696,9 @@ video {
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .flex-col {
   flex-direction: column;
