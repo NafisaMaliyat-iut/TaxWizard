@@ -21,8 +21,7 @@ const loginUser=async(req,res)=>{
         res.status(200).json({success:true,token:token,redirectTo:'/home'});
     }
     catch(error){
-        // return res.status(404).render('error404');
-        return res.status(404).json({error:error.message});
+        return res.status(404).json({success:false,message:error.message});
     }
 }
 
