@@ -4,7 +4,7 @@ const passport = require("passport");
 const { getprofile } = require("../controllers/profile.controllers.js");
 const {
   getHomePage, getCalculateTaxPage, postCalculateTax, getGenerateReportPage, postGenerateReportPage, 
-getChartPage} = require("../controllers/tax.controllers.js");
+} = require("../controllers/tax.controllers.js");
 
 
 route.post("/calculateTax",passport.authenticate('jwt',{session:false}), postCalculateTax);
@@ -14,5 +14,4 @@ route.get("/calculate", getCalculateTaxPage);
 route.post("/calculateTax",passport.authenticate('jwt',{session:false}), postCalculateTax);
 route.get("/report", getGenerateReportPage);
 route.post("/report",passport.authenticate('jwt',{session:false}), postGenerateReportPage);
-route.get("/chart", getChartPage);
 module.exports = route;
