@@ -24,6 +24,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Set up mongo url secret
+
+      run: echo "_MONGO_URI=${{ secrets._MONGO_URI }}" >> $GITHUB_ENV
+
+    - name: Set up node environment variables
+      run: echo "_NODE_ENV=${{ vars._NODE_ENV }}" >> $GITHUB_ENV
+
+    - name: Set up secrets
+      run: echo "_JWT_SECRET=${{ secrets._JWT_SECRET }}" >> $GITHUB_ENV
+
+    - name: Set up port
+      run: echo "_NODE_ENV=${{ vars._PORT }}" >> $GITHUB_ENV
+
     - name: Google Auth
       id: auth
       uses: 'google-github-actions/auth@v1'
@@ -59,8 +72,8 @@ jobs:
         image: "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}/${{ env.SERVICE }}:${{ github.sha }}"
         flags: '--allow-unauthenticated'
         env: |
-              _PORT=${{vars._PORT}}
-              _NODE_ENV=${{ vars._NODE_ENV }}
+              _PORT=${{env._PORT}}
+              _NODE_ENV=${{ env._NODE_ENV }}
               _JWT_SECRET=${{ secrets._JWT_SECRET }}
               _MONGO_URI=${{ secrets._MONGO_URI }}
               _AUTH_TOKEN=${{secrets._AUTH_TOKEN}}
