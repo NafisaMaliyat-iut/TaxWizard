@@ -74,9 +74,9 @@ jobs:
         env_vars: |
               _PORT=${{vars._PORT}}
               _NODE_ENV=${{ vars._NODE_ENV }}
-        secrets: |
               _JWT_SECRET=${{ secrets._JWT_SECRET }}
               _MONGO_URI=${{ secrets._MONGO_URI }}
+              
 
     - name: Show Output
       run: echo ${{ steps.deploy.outputs.url }}
