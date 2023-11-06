@@ -77,7 +77,6 @@ jobs:
         secrets: |
               _JWT_SECRET=${{ secrets._JWT_SECRET }}:latest
               _MONGO_URI=${{ secrets._MONGO_URI }}:latest
-              _AUTH_TOKEN=${{secrets._AUTH_TOKEN}}:latest
 
     - name: Show Output
       run: echo ${{ steps.deploy.outputs.url }}
