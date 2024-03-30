@@ -3,8 +3,9 @@
 DU Hackathon Dev Ops Segment
 
 ## Overview
-[Visit Deployed Site](https://tax-worker-2npiqzi4ka-uw.a.run.app/) 
 Note: The deployed site is no longer functional as the resources provisioned has been deleted to prevent incurring unnecessary charges This repository contains the source code of the application developed for BUET CSE Fest 2023 HackTheVerse.
+
+[Visit Deployed Site](https://tax-worker-2npiqzi4ka-uw.a.run.app/) 
 
 
 TaxWizard is a software tool designed to simplify income tax calculations in Bangladesh. It provides an easy-to-use interface for users to calculate their income tax, manage their profiles, and generate detailed yearly reports. This tool aims to streamline the tax calculation process and make it more accessible for all.
